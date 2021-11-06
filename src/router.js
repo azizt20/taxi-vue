@@ -10,17 +10,20 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {
-      title: 'Главная',
-      layout: 'empty'
-    }
+    // meta: {
+    //   title: 'Главная',
+    //   layout: 'empty'
+    // }
   },
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //
-  //   component: () => import('./views/About.vue')
-  // }
+  {
+    path: '/add',
+    name: 'AddLocations',
+    component: () => import('./views/AddLocations.vue'),
+    // meta: {
+    //   title: 'Добавить новую локацию',
+    //   layout: 'main'
+    // }
+  }
 ]
 
 const router = new VueRouter({

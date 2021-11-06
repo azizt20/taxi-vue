@@ -1,6 +1,8 @@
 <template>
 <div class="Header ">
-  Header
+<router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add">Добавить локацию</router-link>
+<router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="/">Оформить заказ</router-link>
+
 </div>
 </template>
 

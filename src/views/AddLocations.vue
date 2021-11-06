@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">
+  <div class="AddLocations">
 
     <a-layout class="h-100 w-100">
       <a-layout-header class="header">
@@ -7,7 +7,7 @@
       </a-layout-header>
       <a-layout>
         <a-layout-sider class="slider">
-          <OrderForm />
+          <LocationForm />
         </a-layout-sider>
         <a-layout-content class="content">
           <Map/>
@@ -24,15 +24,15 @@
 <script>
 import Map from "../components/Map";
 import Header from "../components/Header";
-import OrderForm from "../components/OrderForm";
+import LocationForm from "../components/LocationForm";
 import Footer from "../components/Footer";
 
 export default {
-  name: "Home",
+  name: "AddLocations",
   components: {
     Map,
     Header,
-    OrderForm,
+    LocationForm,
     Footer
   },
 
@@ -41,12 +41,12 @@ export default {
 
 <style scoped>
 
-.Home {
+.AddLocations {
   height: 100%;
 }
 
 .header, .slider, .footer, .content{
-background: transparent;
+  background: transparent;
 }
 .slider{
   flex: 0 0 400 !important;
