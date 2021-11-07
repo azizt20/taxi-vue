@@ -11,7 +11,7 @@
         />
       </div>
         <ymap-marker v-if="newCords"
-                     :marker-id="newCordsid"
+                     marker-id="newCordsId"
                      :coords="newCords"
                      :icon="newMarkerIcon"
         />

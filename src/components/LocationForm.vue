@@ -4,8 +4,8 @@
     <a-form @submit.prevent="submitRegion" class="form">
       <a-form-item >
         <label>Добавить район
-          <a-input-search placeholder="Название района" size="large" v-model="addRedion" >
-            <a-button slot="enterButton" type="primary" html-type="submit">
+          <a-input-search placeholder="Название района" size="large" v-model="addRegion" >
+            <a-button slot="enterButton" type="primary" @submit.prevent="submitRegion" html-type="submit">
               Добавить
             </a-button>
           </a-input-search>
@@ -94,7 +94,7 @@ export default {
         id: Date.now(),
         region: this.addRegion
       });
-      this.region = ""
+      this.addRegion = ""
     },
     submitLocation() {
       this.createLocation({

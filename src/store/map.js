@@ -13,7 +13,7 @@ export default {
             state.locations = locations
         },
         SET_REGIONS(state, regions) {
-            state.locations = regions
+            state.regions = regions
         },
         SET_NEW_LOCATION(state, newLacation) {
             state.locations.unshift(newLacation)
@@ -40,7 +40,7 @@ export default {
             return state.locations;
         },
         getregions: state => {
-            return state.locations;
+            return state.regions;
         }
 
     }
