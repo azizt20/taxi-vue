@@ -2,7 +2,7 @@
   <div class="AddLocations">
 
     <a-layout class="h-100 w-100">
-      <a-layout-header class="header">
+      <a-layout-header  class="header">
         <Header/>
       </a-layout-header>
       <a-layout>
@@ -10,7 +10,7 @@
           <LocationForm />
         </a-layout-sider>
         <a-layout-content class="content">
-          <Map/>
+          <Map />
         </a-layout-content>
       </a-layout>
       <a-layout-footer class="footer">
@@ -35,6 +35,7 @@ export default {
     LocationForm,
     Footer
   },
+
 
 }
 </script>

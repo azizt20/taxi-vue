@@ -2,19 +2,21 @@
   <div class="yandex-map">
     <yandex-map class="yandex-map" zoom="12" :coords=[41.3082,69.2598] @click="onClick">
 
-      <div v-for="info in getlocations" :key="info.id">
+      <div v-for="info in getlocations" :key="info.url">
         <ymap-marker
-            :marker-id="info.id"
-            :coords="info.coord"
+            :marker-id="info.url"
+            :coords=[info.coordA,info.coordB]
             :icon="defoultMarkerIcon(info)"
             @click="selectLocation(info)"
         />
       </div>
-        <ymap-marker v-if="newCords"
-                     marker-id="newCordsId"
-                     :coords="newCords"
-                     :icon="newMarkerIcon"
+      <div v-if="$route.name == 'addLocations'">
+        <ymap-marker v-if="newCoords"
+                     marker-id="newCoordsId"
+                     :coords="newCoords"
+                     :icon="markerIcon"
         />
+      </div>
 
 
     </yandex-map>
@@ -29,6 +31,8 @@ import {yandexMap, ymapMarker} from 'vue-yandex-maps'
 const {
   mapGetters: mapMapGetters,
   mapActions: mapMapActions,
+  mapMutations: mapMapMutations,
+
 } = createNamespacedHelpers('map')
 
 export default {
@@ -37,23 +41,14 @@ export default {
   data() {
     return {
       selecredLocation: "",
-      newCords: null,
+      newCoords: null,
       markerIcon: {
         layout: 'default#imageWithContent',
         imageSize: [43, 43],
         imageOffset: [0, 0],
-        content: '123 v12',
         contentOffset: [0, 15],
         contentLayout: '<div style="background: red; position: absolute; top: 0; left: 0; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
       },
-      markerIcon2: {
-        layout: 'default#imageWithContent',
-        imageSize: [43, 43],
-        imageOffset: [0, 0],
-        content: '123 v12',
-        contentOffset: [0, 15],
-        contentLayout: '<div style="background: green; position: absolute; top: 0; left: 0; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
-      }
     }
 
   },
@@ -64,22 +59,25 @@ export default {
 
   methods: {
     onClick(e) {
-      this.newCords = e.get('coords');
+      this.newCoords = e.get('coords');
+      this.setCoord(this.newCoords)
+
     },
 
     ...mapMapActions({
-      getAllLocations: 'getFakeLocations',
+      getAllLocations: 'getAllLocations',
+    }),
+    ...mapMapMutations({
+      selectlocation: 'SET_SELECTED_LOCATION',
+      setCoord: 'SET_NEW_COORDS'
     }),
 
     selectLocation(info) {
-      this.selecredLocation = info
+      this.selectlocation(info)
     },
 
     defoultMarkerIcon({location, id}) {
       return {...this.markerIcon, id, content: location}
-    },
-    newMarkerIcon() {
-      return {...this.markerIcon2, content: "new lacations"}
     },
 
 

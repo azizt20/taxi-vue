@@ -1,6 +1,5 @@
 <template>
   <div class="LocationForm">
-
     <a-form @submit.prevent="submitRegion" class="form">
       <a-form-item >
         <label>Добавить район
@@ -14,11 +13,11 @@
     </a-form>
 
 
-    <a-form class="form">
+    <a-form class="form" @submit.prevent="submitLocation">
       <a-form-item >
         <label> Выберите регион
           <a-select class="select-region" v-model="region" size="large" placeholder="Выберите регион">
-            <a-select-option v-for="region in getregions" :key="region.id" :value="region.region">
+            <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
               {{ region.region }}
             </a-select-option>
           </a-select>
@@ -46,7 +45,7 @@
         </label>
       </a-form-item>
 
-      <a-button size="large" type="primary" html-type="submit">
+      <a-button size="large" type="primary" @submit.prevent="submitLocation" html-type="submit">
         Добавить новую локацию
       </a-button>
     </a-form>
@@ -62,7 +61,6 @@ import {createNamespacedHelpers} from 'vuex'
 const {
   mapGetters: mapMapGetters,
   mapActions: mapMapActions,
-  mapMutations: mapMapMutations,
 } = createNamespacedHelpers('map')
 
 export default {
@@ -76,33 +74,39 @@ export default {
       coordB: "",
     }
   },
-
+  watch: {
+    getNewCoords: function () {
+      this.coordA = this.getNewCoords[0]
+      this.coordB = this.getNewCoords[1]
+    }
+  },
   mounted() {
     this.getAllLocations()
   },
-
   methods: {
     ...mapMapActions({
-      getAllLocations: 'getFakeLocations',
-    }),
-    ...mapMapMutations({
-      createRegion: 'SET_NEW_REGION',
-      createLocation: 'SET_NEW_LOCATION',
+      getAllLocations: 'getAllLocations',
+      createRegion: 'addRegion',
+      createLocation: 'addLocation',
+
     }),
     submitRegion() {
       this.createRegion({
-        id: Date.now(),
         region: this.addRegion
-      });
+      })
       this.addRegion = ""
     },
     submitLocation() {
       this.createLocation({
-        id: Date.now(),
         location: this.location,
-        region: this.region,
+        addr: this.region,
+        coordA: this.coordA,
+        coordB: this.coordB
       });
       this.location = ""
+      this.region = ""
+      this.coordB = ""
+      this.coordA = ""
     }
   },
 
@@ -110,6 +114,7 @@ export default {
     ...mapMapGetters({
       getlocations: 'getlocations',
       getregions: 'getregions',
+      getNewCoords: 'getNewCoords',
     }),
   },
 

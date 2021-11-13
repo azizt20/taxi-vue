@@ -1,5 +1,5 @@
 <template>
-  <div class="Home">
+  <div class="Order">
 
     <a-layout class="h-100 w-100">
       <a-layout-header class="header">
@@ -7,7 +7,7 @@
       </a-layout-header>
       <a-layout>
         <a-layout-sider class="slider">
-          <OrderForm />
+          <OrderForm/>
         </a-layout-sider>
         <a-layout-content class="content">
           <Map/>
@@ -28,20 +28,19 @@ import OrderForm from "../components/OrderForm";
 import Footer from "../components/Footer";
 
 export default {
-  name: "Home",
+  name: "Order",
   components: {
     Map,
     Header,
     OrderForm,
     Footer
   },
-
 }
 </script>
 
 <style scoped>
 
-.Home {
+.Order {
   height: 100%;
 }
 
