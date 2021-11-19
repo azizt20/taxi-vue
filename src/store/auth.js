@@ -1,4 +1,4 @@
-import apiRequest from '@/utils/apiRequest';
+import apiRequest from "../utils/apiRequest";
 import router from "../router";
 
 export default {
@@ -24,24 +24,22 @@ export default {
         REMOVE_TOKEN(state) {
             localStorage.removeItem('token');
             state.token = undefined;
-            apiRequest.defaults.headers.Authorization = `Token ${state.token}`;
+            delete apiRequest.defaults.headers.Authorization
         }
     },
     actions: {
         login({commit}, formData) {
             return new Promise((resolve, reject) => {
-                alert("asdasda")
                 apiRequest
                     .post('/login/', formData)
                     .then((result) => {
                         const key = result.data.key;
-                        alert(key)
                         commit('SET_TOKEN', key);
                         commit('SET_AUTHORIZED_STATUS', true);
                         resolve();
                     })
                     .catch((error) => {
-                        // alert("Вы ввели неправельный логин или пароль!!!")
+                        alert("Вы ввели неправельный логин или пароль!!!")
                         reject(error);
                     });
             });
@@ -64,10 +62,10 @@ export default {
         },
         logout({commit}) {
             return new Promise((resolve, reject) => {
-                alert("asdas")
                 apiRequest
                     .post('/logout/')
                     .then(() => {
+                        alert("asdas")
                         commit('REMOVE_TOKEN');
                         commit('SET_AUTHORIZED_STATUS', false);
                         router.push({name: 'login'})

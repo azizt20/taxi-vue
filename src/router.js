@@ -54,15 +54,15 @@ router.beforeEach((to, from, next) => {
         if (to.meta.requiredAuth && !isAuthorized) {
           next({ name: 'login' });
         } else {
-          document.title = `${to.meta.title} - Ecoforum40.ru`;
+          document.title = `${to.meta.title} - Шох кот`;
           next();
         }
       })
       .catch(() => {
         if (to.meta.requiredAuth) {
-          next({ name: 'Login' });
+          next({ name: 'login' });
         } else {
-          document.title = `${to.meta.title} - Ecoforum40.ru`;
+          document.title = `${to.meta.title} - Шох кот`;
           next();
         }
       });

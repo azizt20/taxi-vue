@@ -1,6 +1,6 @@
 <template>
   <div class="Orderform">
-    <a-form class="form">
+    <a-form @submit.prevent="submitOrder" class="form">
       <a-form-item>
         <label>Номер заказа (id)
           <a-input v-model="orderId" disabled="" size="large" id="for-id"/>
@@ -16,7 +16,7 @@
 
       <a-form-item>
         <label>Номер заказчика
-          <a-input v-model="phoneNomber" size="large">
+          <a-input v-model="phoneNomber" type="number" size="large">
             <a-input size="large" slot="addonBefore"
                      style="width: 70px; padding: 0; border: none; background: transparent" disabled value="+998"/>
           </a-input>
@@ -25,7 +25,8 @@
 
       <a-form-item>
         <label> Выберите регион
-          <a-select class="select-region" v-model="region" @change="changeRegion" size="large" placeholder="Выберите регион">
+          <a-select class="select-region" v-model="region" @change="changeRegion" size="large"
+                    placeholder="Выберите регион">
             <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
               {{ region.region }}
             </a-select-option>
@@ -45,7 +46,7 @@
         </label>
       </a-form-item>
 
-      <a-button size="large" type="primary" html-type="submit">
+      <a-button @submit.prevent="submitOrder" size="large" type="primary" html-type="submit">
         Оформить заказ
       </a-button>
 
@@ -61,8 +62,11 @@ import {createNamespacedHelpers} from 'vuex'
 const {
   mapGetters: mapMapGetters,
   mapActions: mapMapActions,
-
 } = createNamespacedHelpers('map')
+
+const {
+  mapActions: mapOrderActions
+} = createNamespacedHelpers('order')
 
 export default {
   name: "OrderForm",
@@ -86,13 +90,34 @@ export default {
   mounted() {
     this.getAllLocations()
   },
+  created() {
+    this.webSocket()
+  },
 
   methods: {
     ...mapMapActions({
       getAllLocations: 'getAllLocations',
     }),
+    ...mapOrderActions({
+      createOrder: 'createOrder',
+      webSocket: 'webSocket'
+    }),
     changeRegion() {
       this.idLocation = ""
+    },
+    submitOrder() {
+      this.createOrder({
+        full_name: this.clientName,
+        phone_number: this.phoneNomber,
+        address: this.region,
+        receiver: null
+      });
+      this.clientName = ""
+      this.orderId = Date.now()
+      this.phoneNomber = ""
+      this.region = ""
+      this.idLocation = ""
+
     }
 
   },

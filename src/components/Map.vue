@@ -47,7 +47,7 @@ export default {
         imageSize: [43, 43],
         imageOffset: [0, 0],
         contentOffset: [0, 15],
-        contentLayout: '<div style="background: red; position: absolute; top: 0; left: 0; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
+        contentLayout: '<div style="background: red; position: absolute; font-size: 10px; top: 0; left: 0; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
       },
     }
 

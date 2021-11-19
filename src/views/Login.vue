@@ -77,7 +77,6 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         this.login(values)
-            console.log(values)
             .then(() => {
               this.$router.push({ name: 'order' })
             })
