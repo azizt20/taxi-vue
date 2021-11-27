@@ -1,6 +1,13 @@
 import apiRequest from "../utils/apiRequest";
 
 const WS_URL = process.env.VUE_APP_WS_URL;
+// function  getId(url){
+//     let someUrl = url.split('/')
+//     console.log(someUrl[someUrl.lang - 1])
+//     console.log("1")
+//     // someUrl[someUrl.lang - 1]
+//     return 1
+// }
 
 export default {
     namespaced: true,
@@ -33,19 +40,20 @@ export default {
                 apiRequest
                     .post('/admin/order/', order)
                     .then(res => {
-                        commit('SET_ORDER', res)
+                        commit('SET_ORDER', res.data)
+                        // const id = getId(res.data.url)
+                        // alert(id)
                         dispatch('sendOrder', {
-                            type: "accept_order",
-                            order_id: order.url
+                            type: "send_order",
+                            order_id: "1"
                         })
                         resolve()
                     })
             })
         },
-        webSocket(state, {commit}) {
+        webSocket({state, commit}) {
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
-                alert(e)
                 console.log(e)
                 commit('SET_STATUS', "connected")
             };

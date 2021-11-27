@@ -109,7 +109,7 @@ export default {
       this.createOrder({
         full_name: this.clientName,
         phone_number: this.phoneNomber,
-        address: this.region,
+        address: this.idLocation,
         receiver: null
       });
       this.clientName = ""

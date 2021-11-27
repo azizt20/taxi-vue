@@ -68,8 +68,6 @@ export default {
         },
         async addLocation({commit}, newLocation) {
             await new Promise((resolve) => {
-                console.log(newLocation)
-                console.log(newLocation.location)
                 apiRequest
                     .post('/admin/location/', newLocation)
                     .then(res => {
