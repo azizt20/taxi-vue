@@ -1,13 +1,13 @@
 import apiRequest from "../utils/apiRequest";
 
 const WS_URL = process.env.VUE_APP_WS_URL;
-// function  getId(url){
-//     let someUrl = url.split('/')
-//     console.log(someUrl[someUrl.lang - 1])
-//     console.log("1")
-//     // someUrl[someUrl.lang - 1]
-//     return 1
-// }
+function  getId(url){
+    let someUrl = url.split('/')
+    console.log(someUrl[someUrl.length-2])
+    console.log(someUrl)
+    return someUrl[someUrl.length-2]
+}
+
 
 export default {
     namespaced: true,
@@ -41,11 +41,10 @@ export default {
                     .post('/admin/order/', order)
                     .then(res => {
                         commit('SET_ORDER', res.data)
-                        // const id = getId(res.data.url)
-                        // alert(id)
+                        const id = getId(res.data.url)
                         dispatch('sendOrder', {
                             type: "send_order",
-                            order_id: "1"
+                            order_id: id
                         })
                         resolve()
                     })
