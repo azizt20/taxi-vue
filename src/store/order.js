@@ -3,8 +3,6 @@ import apiRequest from "../utils/apiRequest";
 const WS_URL = process.env.VUE_APP_WS_URL;
 function  getId(url){
     let someUrl = url.split('/')
-    console.log(someUrl[someUrl.length-2])
-    console.log(someUrl)
     return someUrl[someUrl.length-2]
 }
 
@@ -51,6 +49,7 @@ export default {
             })
         },
         webSocket({state, commit}) {
+            console.log("welcome")
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
@@ -60,7 +59,8 @@ export default {
                 console.log(e)
             }
         },
-        sendOrder(state, orderUrl) {
+        sendOrder({state}, orderUrl) {
+            console.log(orderUrl);
             console.log(state.websocekt);
             state.websocekt.send(orderUrl);
         }

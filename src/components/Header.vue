@@ -2,7 +2,7 @@
 <div class="Header ">
   <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="/">Оформить заказ</router-link>
   <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add">Добавить локацию</router-link>
-  <a-button @click="logout">
+  <a-button @click="logoutt">
     Выйти
   </a-button>
 
@@ -22,7 +22,11 @@ export default {
   methods: {
     ...mapAuthActions({
       logout: 'logout'
-    })
+    }),
+    logoutt() {
+      alert("asdas")
+      this.logout()
+    }
   }
 }
 </script>
