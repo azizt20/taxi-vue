@@ -28,7 +28,7 @@ export default {
             state.status = status
         },
         SET_ALL_ORDERS(state, allOrders){
-            state.allOrders.push(allOrders)
+            state.allOrders = allOrders
         }
 
     },
@@ -59,11 +59,24 @@ export default {
                 console.log(e)
             }
         },
-        sendOrder({state}, orderUrl) {
-            console.log(orderUrl);
+
+        sendOrder({state}, order) {
+            let orderJson = JSON.stringify(order)
+            console.log(orderJson);
             console.log(state.websocekt);
-            state.websocekt.send(orderUrl);
-        }
+            state.websocekt.send(orderJson);
+        },
+
+        async getOrders({commit}) {
+            await new Promise((resolve) => {
+                apiRequest
+                    .get('/admin/order/')
+                    .then(res => {
+                        commit('SET_ALL_ORDERS', res.data.results)
+                        resolve()
+                    })
+            })
+        },
     },
 
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="yandex-map">
-    <yandex-map class="yandex-map" zoom="12" :coords=[41.3082,69.2598] @click="onClick">
+    <yandex-map class="yandex-map" zoom="12" :coords=newCoords @click="onClick">
 
       <div v-for="info in getlocations" :key="info.url">
         <ymap-marker
@@ -10,7 +10,7 @@
             @click="selectLocation(info)"
         />
       </div>
-      <div v-if="$route.name == 'addLocations'">
+      <div v-if="$route.name == 'addLocations' || $route.name == 'editLocations'">
         <ymap-marker v-if="newCoords"
                      marker-id="newCoordsId"
                      :coords="newCoords"
@@ -41,11 +41,11 @@ export default {
   data() {
     return {
       selecredLocation: "",
-      newCoords: null,
+      newCoords: [41.3082,69.2598],
       markerIcon: {
         layout: 'default#imageWithContent',
         imageSize: [43, 43],
-        imageOffset: [0, 0],
+        imageOffset: [-22, -43],
         contentOffset: [0, 15],
         contentLayout: '<div style="background: red; position: absolute; font-size: 10px; top: 0; left: 0; color: #FFFFFF; font-weight: bold;">$[properties.iconContent]</div>'
       },

@@ -1,39 +1,36 @@
 <template>
-  <div class="AddLocations">
+  <div class="OrdersInfo">
 
     <a-layout class="h-100 w-100">
-      <a-layout-header  class="header">
+
+      <a-layout-header class="header">
         <Header/>
       </a-layout-header>
-      <a-layout>
-        <a-layout-sider class="slider">
-          <AddForm />
-        </a-layout-sider>
-        <a-layout-content class="content">
-          <Map />
-        </a-layout-content>
-      </a-layout>
+
+      <a-layout-content class="content">
+        <Orders />
+      </a-layout-content>
+
       <a-layout-footer class="footer">
         <Footer/>
       </a-layout-footer>
+
     </a-layout>
 
   </div>
 </template>
 
 <script>
-import Map from "../components/Map";
 import Header from "../components/Header";
-import AddForm from "../components/AddForm";
 import Footer from "../components/Footer";
+import Orders from "../components/Orders";
 
 export default {
-  name: "AddLocations",
+  name: "OrdersInfo",
   components: {
-    Map,
     Header,
-    AddForm,
-    Footer
+    Footer,
+    Orders
   },
 
 
@@ -42,14 +39,15 @@ export default {
 
 <style scoped>
 
-.AddLocations {
+.OrdersInfo {
   height: 100%;
 }
 
-.header, .slider, .footer, .content{
+.header, .slider, .footer, .content {
   background: transparent;
 }
-.slider{
+
+.slider {
   flex: 0 0 400 !important;
   max-width: 400px !important;
   width: 400px !important;

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Order from './views/Order'
+import CreateOrder from './views/CreateOrder'
 import store from '@/store';
 
 
@@ -10,7 +10,7 @@ const routes = [
   {
     path: '/',
     name: 'order',
-    component: Order,
+    component: CreateOrder,
     meta: {
       title: 'Главная',
       layout: 'main',
@@ -23,6 +23,26 @@ const routes = [
     component: () => import('./views/AddLocations.vue'),
     meta: {
       title: 'Добавить новую локацию',
+      layout: 'empty',
+      requiredAuth: true,
+    }
+  },
+  {
+    path: '/edit',
+    name: 'editLocations',
+    component: () => import('./views/EditLocations.vue'),
+    meta: {
+      title: 'Редактировать локации',
+      layout: 'empty',
+      requiredAuth: true,
+    }
+  },,
+  {
+    path: '/orders',
+    name: 'orderInfo',
+    component: () => import('./views/OrdersInfo'),
+    meta: {
+      title: 'Информация о заказах',
       layout: 'empty',
       requiredAuth: true,
     }
@@ -50,7 +70,6 @@ router.beforeEach((to, from, next) => {
   store.dispatch('auth/refresh')
       .then(() => {
         const isAuthorized = store.getters['auth/isAuthorized'];
-
         if (to.meta.requiredAuth && !isAuthorized) {
           next({ name: 'login' });
         } else {

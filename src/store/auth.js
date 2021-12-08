@@ -65,11 +65,9 @@ export default {
                 apiRequest
                     .post('/logout/')
                     .then(() => {
-                        alert("asdas")
                         commit('REMOVE_TOKEN');
                         commit('SET_AUTHORIZED_STATUS', false);
                         router.push({name: 'login'})
-
                         resolve();
                     })
                     .catch((error) => {

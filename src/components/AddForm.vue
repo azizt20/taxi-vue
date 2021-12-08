@@ -1,5 +1,5 @@
 <template>
-  <div class="LocationForm">
+  <div class="AddForm">
     <a-form @submit.prevent="submitRegion" class="form">
       <a-form-item >
         <label>Добавить район
@@ -45,7 +45,7 @@
         </label>
       </a-form-item>
 
-      <a-button size="large" type="primary" @submit.prevent="submitLocation" html-type="submit">
+      <a-button size="large" type="primary" :disabled="!coordA || !region || !location"  @submit.prevent="submitLocation" html-type="submit">
         Добавить новую локацию
       </a-button>
     </a-form>
@@ -64,7 +64,7 @@ const {
 } = createNamespacedHelpers('map')
 
 export default {
-  name: "LocationForm",
+  name: "AddForm",
   data(){
     return{
       location: "",
@@ -122,7 +122,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.LocationForm {
+.AddForm {
   height: 100%;
   display: flex;
   flex-direction:column;

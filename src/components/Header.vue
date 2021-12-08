@@ -2,10 +2,11 @@
 <div class="Header ">
   <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="/">Оформить заказ</router-link>
   <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add">Добавить локацию</router-link>
+  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="edit">Редактировать локации</router-link>
+  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="orders">Информация о заказах</router-link>
   <a-button @click="logoutt">
     Выйти
   </a-button>
-
 </div>
 </template>
 
@@ -24,7 +25,6 @@ export default {
       logout: 'logout'
     }),
     logoutt() {
-      alert("asdas")
       this.logout()
     }
   }

@@ -1,16 +1,16 @@
 <template>
-  <div class="AddLocations">
+  <div class="CreateOrder">
 
     <a-layout class="h-100 w-100">
-      <a-layout-header  class="header">
+      <a-layout-header class="header">
         <Header/>
       </a-layout-header>
       <a-layout>
         <a-layout-sider class="slider">
-          <AddForm />
+          <OrderForm/>
         </a-layout-sider>
         <a-layout-content class="content">
-          <Map />
+          <Map/>
         </a-layout-content>
       </a-layout>
       <a-layout-footer class="footer">
@@ -24,30 +24,28 @@
 <script>
 import Map from "../components/Map";
 import Header from "../components/Header";
-import AddForm from "../components/AddForm";
+import OrderForm from "../components/OrderForm";
 import Footer from "../components/Footer";
 
 export default {
-  name: "AddLocations",
+  name: "Order",
   components: {
     Map,
     Header,
-    AddForm,
+    OrderForm,
     Footer
   },
-
-
 }
 </script>
 
 <style scoped>
 
-.AddLocations {
+.CreateOrder {
   height: 100%;
 }
 
 .header, .slider, .footer, .content{
-  background: transparent;
+background: transparent;
 }
 .slider{
   flex: 0 0 400 !important;

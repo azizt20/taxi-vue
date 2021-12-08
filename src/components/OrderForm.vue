@@ -46,7 +46,7 @@
         </label>
       </a-form-item>
 
-      <a-button @submit.prevent="submitOrder" size="large" type="primary" html-type="submit">
+      <a-button @submit.prevent="submitOrder" :disabled="!region || !idLocation || !clientName || !phoneNomber" size="large" type="primary" html-type="submit">
         Оформить заказ
       </a-button>
 
@@ -108,7 +108,7 @@ export default {
     submitOrder() {
       this.createOrder({
         full_name: this.clientName,
-        phone_number: this.phoneNomber,
+        phone_number: "+998" + this.phoneNomber,
         address: this.idLocation,
         receiver: null
       });
