@@ -36,7 +36,7 @@ const routes = [
       layout: 'empty',
       requiredAuth: true,
     }
-  },,
+  },
   {
     path: '/orders',
     name: 'orderInfo',
