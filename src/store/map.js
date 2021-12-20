@@ -29,11 +29,10 @@ export default {
             return state.newCoords;
         },
         getlocationByRegion: (state) => (region) => {
-            return state.locations.filter(todo => todo.addr === region);
+            return state.locations.filter(location => location.addr === region);
         },
         getlocationByUrl: (state) => (url) => {
-            const location = state.locations.find(todo => todo.url === url)
-            return location;
+            return state.locations.find(location => location.url === url);
         }
     },
 
@@ -71,7 +70,7 @@ export default {
                 apiRequest
                     .get('/admin/location/')
                     .then(res => {
-                        commit('SET_LOCATIONS', res.data.results)
+                        commit('SET_LOCATIONS', res.data)
                         resolve()
                     })
             })
@@ -82,7 +81,7 @@ export default {
                 apiRequest
                     .get('/admin/address/')
                     .then(res => {
-                        commit('SET_REGIONS', res.data.results)
+                        commit('SET_REGIONS', res.data)
                         resolve()
                     })
             })
@@ -103,7 +102,7 @@ export default {
             await new Promise((resolve) => {
                 apiRequest
                     .post('/admin/location/', newLocation)
-                    .then(res => {
+                        .then(res => {
                         commit('SET_NEW_LOCATION', res.data)
                         alert("Локация " + newLocation.location + " добавлена в список!!! ")
                         resolve()
@@ -118,7 +117,6 @@ export default {
                     .put(`/admin/location/${id}/`, newLocation)
                     .then(res => {
                         dispatch('getAllLocations')
-                        console.log(res.data.location)
                         alert("Локация была переименованна на " + res.data.location + "!!! ")
                         resolve()
                     })
