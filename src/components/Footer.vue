@@ -1,6 +1,8 @@
 <template>
 <div class="Footer">
-  FooterFooterFooter
+  <h3>
+    Chopar Taxi
+  </h3>
 </div>
 </template>
 

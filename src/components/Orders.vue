@@ -69,7 +69,6 @@ import {createNamespacedHelpers} from 'vuex'
 
 const {
   mapGetters: mapMapGetters,
-  mapActions: mapMapActions,
 } = createNamespacedHelpers('map')
 
 const {
@@ -93,14 +92,11 @@ export default {
     }
   },
   mounted() {
-    this.getAllLocations()
     this.getOrders()
     this.getUsers()
   },
   methods: {
-    ...mapMapActions({
-        getAllLocations: 'getAllLocations'
-    }),
+
     ...mapOrderActions({
       getOrders: 'getOrders',
       getUsers: 'getUsers',

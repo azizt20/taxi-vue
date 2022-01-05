@@ -13,7 +13,7 @@ const routes = [
     component: CreateOrder,
     meta: {
       title: 'Главная',
-      layout: 'main',
+      layout: 'empty',
       requiredAuth: false,
     }
   },

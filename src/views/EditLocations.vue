@@ -2,25 +2,20 @@
   <div class="EditLocations">
 
     <a-layout class="h-100 w-100">
-      <a-layout-sider class="slider">
-        <EditForm />
-      </a-layout-sider>
+      <a-layout-header class="header">
+        <Header/>
+      </a-layout-header>
       <a-layout>
-      <a-layout>
-
-        <a-layout-header class="header">
-          <Header/>
-        </a-layout-header>
+        <a-layout-sider class="slider">
+          <EditForm />
+        </a-layout-sider>
         <a-layout-content class="content">
           <Map/>
         </a-layout-content>
-
       </a-layout>
-
       <a-layout-footer class="footer">
         <Footer/>
       </a-layout-footer>
-    </a-layout>
     </a-layout>
 
   </div>

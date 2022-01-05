@@ -30,7 +30,6 @@ import {yandexMap, ymapMarker} from 'vue-yandex-maps'
 
 const {
   mapGetters: mapMapGetters,
-  mapActions: mapMapActions,
   mapMutations: mapMapMutations,
 
 } = createNamespacedHelpers('map')
@@ -53,10 +52,6 @@ export default {
 
   },
 
-  mounted() {
-    this.getAllLocations()
-  },
-
   methods: {
     onClick(e) {
       this.newCoords = e.get('coords');
@@ -64,9 +59,6 @@ export default {
 
     },
 
-    ...mapMapActions({
-      getAllLocations: 'getAllLocations',
-    }),
     ...mapMapMutations({
       selectlocation: 'SET_SELECTED_LOCATION',
       setCoord: 'SET_NEW_COORDS'

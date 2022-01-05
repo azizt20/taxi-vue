@@ -66,7 +66,6 @@ import {createNamespacedHelpers} from 'vuex'
 
 const {
   mapGetters: mapMapGetters,
-  mapActions: mapMapActions,
 } = createNamespacedHelpers('map')
 
 const {
@@ -93,18 +92,14 @@ export default {
     },
 
   },
-  mounted() {
-    this.getAllLocations()
-  },
+
   created() {
     this.webSocket()
     setInterval(this.getDateTime, 1000)
   },
 
   methods: {
-    ...mapMapActions({
-      getAllLocations: 'getAllLocations',
-    }),
+
     ...mapOrderActions({
       createOrder: 'createOrder',
       webSocket: 'webSocket'
@@ -132,7 +127,7 @@ export default {
       var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
       var time = today.getHours() + ":" + today.getMinutes() + ":" +
           today.getSeconds();
-      const dateTime = time + '      ' + date;
+      const dateTime = time + '   -   ' + date;
       this.dateTime = dateTime;
 
     }
