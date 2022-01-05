@@ -33,6 +33,9 @@ export default {
         },
         getlocationByUrl: (state) => (url) => {
             return state.locations.find(location => location.url === url);
+        },
+        getRegionByUrl: (state) => (url) => {
+            return state.regions.find(region => region.url === url);
         }
     },
 

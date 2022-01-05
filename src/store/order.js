@@ -26,7 +26,10 @@ export default {
             return state.allUsers
         },
         getUserById: state => (id) => {
-            return state.allUsers.filter(user => user.pk === id);
+            return state.allUsers.find(user => user.pk === id);
+        },
+        getUserByUrl: state => (url) => {
+            return state.allUsers.find(user => user.url === url);
         }
     },
 

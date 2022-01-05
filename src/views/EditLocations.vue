@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .EditLocations {
   height: 100%;
