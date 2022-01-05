@@ -17,7 +17,7 @@
       <a-form-item>
         <label>Номер заказчика
           <a-input v-model="phoneNomber" type="number" min="0" size="large">
-            <a-input  size="large" slot="addonBefore"
+            <a-input size="large" slot="addonBefore"
                      style="width: 70px; padding: 0; border: none; background: transparent" disabled value="+998"/>
           </a-input>
         </label>
@@ -25,9 +25,11 @@
 
       <a-form-item>
         <label> Выберите регион
-          <a-select style="text-align: center" class="select-region" v-model="region" @change="changeRegion" size="large"
+          <a-select style="text-align: center" class="select-region" v-model="region" @change="changeRegion"
+                    size="large"
                     placeholder="Выберите регион">
-            <a-select-option style="text-align: center" v-for="region in getregions" :key="region.url" :value="region.url">
+            <a-select-option style="text-align: center" v-for="region in getregions" :key="region.url"
+                             :value="region.url">
               {{ region.region }}
             </a-select-option>
           </a-select>
@@ -36,9 +38,11 @@
 
       <a-form-item>
         <label> Выберите локацию
-          <a-select style="text-align: center" size="large" v-model="idLocation" class="select-region" :disabled="!getselectedlocation && !region"
+          <a-select style="text-align: center" size="large" v-model="idLocation" class="select-region"
+                    :disabled="!getselectedlocation && !region"
                     placeholder="Выберите регион">
-            <a-select-option style="text-align: center" v-for="location in getlocationByRegion(this.region)" :key="location.url"
+            <a-select-option style="text-align: center" v-for="location in getlocationByRegion(this.region)"
+                             :key="location.url"
                              :value="location.url">
               {{ location.location }}
             </a-select-option>
@@ -46,7 +50,8 @@
         </label>
       </a-form-item>
 
-      <a-button @submit.prevent="submitOrder" :disabled="!region || !idLocation || !clientName || !phoneNomber" size="large" type="primary" html-type="submit">
+      <a-button @submit.prevent="submitOrder" :disabled="!region || !idLocation || !clientName || !phoneNomber"
+                size="large" type="primary" html-type="submit">
         Оформить заказ
       </a-button>
 
@@ -93,7 +98,7 @@ export default {
   },
   created() {
     this.webSocket()
-    setInterval(this.getDateTime,1000)
+    setInterval(this.getDateTime, 1000)
   },
 
   methods: {
@@ -124,10 +129,10 @@ export default {
 
     getDateTime() {
       var today = new Date();
-      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
       var time = today.getHours() + ":" + today.getMinutes() + ":" +
           today.getSeconds();
-      const dateTime = time +'      '+ date;
+      const dateTime = time + '      ' + date;
       this.dateTime = dateTime;
 
     }
@@ -147,11 +152,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.select-region {
-  width: 100%;
-}
 
-.form {
-  padding: 0 20px;
+.Orderform {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .select-region {
+    width: 100%;
+  }
+
+  .form {
+    padding: 0 20px;
+
+    input{
+      background: #FFFFFF;
+    }
+  }
 }
 </style>

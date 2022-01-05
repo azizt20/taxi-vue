@@ -42,14 +42,11 @@ export default {
 
 .CreateOrder {
   height: 100%;
+  background: transparent;
 }
 
 .header, .slider, .footer, .content{
-background: transparent;
+  background: transparent;
 }
-.slider{
-  flex: 0 0 400 !important;
-  max-width: 400px !important;
-  width: 400px !important;
-}
+
 </style>
