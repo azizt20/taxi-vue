@@ -73,7 +73,7 @@ router.beforeEach((to, from, next) => {
         if (to.meta.requiredAuth && !isAuthorized) {
           next({ name: 'login' });
         } else {
-          document.title = `${to.meta.title} - Шох кот`;
+          document.title = `${to.meta.title}`;
           next();
         }
       })
@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
         if (to.meta.requiredAuth) {
           next({ name: 'login' });
         } else {
-          document.title = `${to.meta.title} - Шох кот`;
+          document.title = `${to.meta.title}`;
           next();
         }
       });

@@ -1,10 +1,13 @@
 <template>
 <div class="Header ">
-  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="/">Оформить заказ</router-link>
-  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add">Добавить локацию</router-link>
-  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="edit">Редактировать локации</router-link>
-  <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="orders">Информация о заказах</router-link>
-  <a-button @click="logoutt">
+  <div></div>
+  <row>
+    <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="/">Оформить заказ</router-link>
+    <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add">Добавить локацию</router-link>
+    <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="edit">Редактировать локации</router-link>
+    <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="orders">Информация о заказах</router-link>
+  </row>
+  <a-button type="danger"  @click="logoutt">
     Выйти
   </a-button>
 </div>
@@ -33,7 +36,9 @@ export default {
 
 <style scoped>
 .Header{
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   height: 100%;
 }
 

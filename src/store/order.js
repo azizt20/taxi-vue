@@ -10,36 +10,44 @@ function  getId(url){
 export default {
     namespaced: true,
     state: {
-        oreder: null,
         websocekt: '',
-        status: '',
-        allOrders: ''
+        allOrders: '',
+        allUsers: '',
     },
+
     getters: {
         getAllOrders: state => {
             return state.allOrders;
         },
+        getOrdersByStatus: state => (status) => {
+            return state.allOrders.filter(order => order.status === status);
+        },
+        getAllUsers: state => {
+            return state.allUsers
+        },
+        getUserById: state => (id) => {
+            return state.allUsers.filter(user => user.pk === id);
+        }
     },
+
     mutations: {
-        SET_ORDER(state, order) {
-            state.order = order
-        },
-        SET_STATUS(state, status) {
-            state.status = status
-        },
         SET_ALL_ORDERS(state, allOrders){
             state.allOrders = allOrders
+        },
+        SET_ALL_USERS(state, allUsers){
+            const users = allUsers.filter(user => user.is_superuser === false);
+            state.allUsers = users
         }
-
     },
+
     actions: {
-        async createOrder({dispatch, commit}, order) {
+        async createOrder({dispatch}, order) {
             await new Promise((resolve) => {
                 apiRequest
                     .post('/admin/order/', order)
                     .then(res => {
-                        commit('SET_ORDER', res.data)
                         const id = getId(res.data.url)
+                        alert(id)
                         dispatch('sendOrder', {
                             type: "send_order",
                             order_id: id
@@ -48,12 +56,11 @@ export default {
                     })
             })
         },
-        webSocket({state, commit}) {
-            console.log("welcome")
+
+        webSocket({state}) {
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
-                commit('SET_STATUS', "connected")
             };
             state.websocekt.onmessage = (e) => {
                 console.log(e)
@@ -62,7 +69,6 @@ export default {
 
         sendOrder({state}, order) {
             let orderJson = JSON.stringify(order)
-            console.log(orderJson);
             console.log(state.websocekt);
             state.websocekt.send(orderJson);
         },
@@ -72,11 +78,24 @@ export default {
                 apiRequest
                     .get('/admin/order/')
                     .then(res => {
-                        commit('SET_ALL_ORDERS', res.data.results)
+                        commit('SET_ALL_ORDERS', res.data)
                         resolve()
                     })
             })
         },
+
+
+        async getUsers({commit}) {
+            await new Promise((resolve) => {
+                apiRequest
+                    .get('/admin/user/')
+                    .then(res => {
+                        commit('SET_ALL_USERS', res.data)
+                        resolve()
+                    })
+            })
+        },
+
     },
 
 };
