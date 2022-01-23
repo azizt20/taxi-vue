@@ -4,7 +4,7 @@
     <div class="d-flex-column">
       <div class="title">
         <a-icon type="user"/>
-        Пользователь
+        {{$t('Пользователь')}}
       </div>
 
       {{fullName}}
@@ -27,7 +27,7 @@
     <div class="d-flex-column">
       <div class="title">
         <a-icon type="car"/>
-        Машина
+        {{$t('Машина')}}
       </div>
       {{ driver.info_driver.car_color }}
       {{ driver.info_driver.car_name }}
@@ -36,7 +36,7 @@
     <div class="d-flex-column">
       <div class="title">
         <a-icon type="number" />
-        Номер авто
+        {{$t('Номер авто')}}
       </div>
       {{ driver.info_driver.car_number }}
     </div>
@@ -45,7 +45,7 @@
     <div class="d-flex-column">
       <div class="title">
         <a-icon type="calendar" />
-        Зарегистрирован
+        {{$t('Зарегистрирован')}}
       </div>
       {{date}} - {{time}}
     </div>

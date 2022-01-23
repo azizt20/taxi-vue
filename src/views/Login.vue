@@ -8,7 +8,8 @@
         @submit="handleSubmit"
     >
       <a-form-item>
-        <a-input
+        <label>{{$t('Логин')}}
+        <a-input size="large"
             v-decorator="[
           'username',
           { rules: [{ required: true, message: 'Please input your username!' }] },
@@ -17,9 +18,11 @@
         >
           <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
         </a-input>
+        </label>
       </a-form-item>
       <a-form-item>
-        <a-input
+        <label>{{$t('Пароль')}}
+          <a-input size="large"
             v-decorator="[
           'password',
           { rules: [{ required: true, message: 'Please input your Password!' }] },
@@ -29,11 +32,12 @@
         >
           <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
         </a-input>
+        </label>
       </a-form-item>
       <a-form-item>
 
         <a-button type="primary" html-type="submit" class="login-form-button">
-          Log in
+          {{$t('Войти')}}
         </a-button>
       </a-form-item>
     </a-form>

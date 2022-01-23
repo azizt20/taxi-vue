@@ -23,7 +23,7 @@ export default {
 
         REMOVE_TOKEN(state) {
             localStorage.removeItem('token');
-            state.token = undefined;
+            state.token = false;
             delete apiRequest.defaults.headers.Authorization
         }
     },

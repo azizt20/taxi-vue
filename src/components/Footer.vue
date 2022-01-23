@@ -1,6 +1,6 @@
 <template>
 <div class="Footer">
-  FooterFooterFooter
+  Footer Footer Footer
 </div>
 </template>
 

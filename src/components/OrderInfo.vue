@@ -5,21 +5,21 @@
 <Coords :coord="coord"/>
       </a-modal>
       <div class="title">
-        Клиент
+        {{ $t('Клиент') }}
       </div>
       {{ order.full_name }}
     </div>
 
     <div class="d-flex-column">
       <div class="title">
-        Номер заказчика
+        {{$t('Номер заказчика')}}
       </div>
       {{ order.phone_number }}
     </div>
 
     <div class="d-flex-column">
       <div class="title">
-        Адрес
+        {{$t('Адрес')}}
       </div>
       {{ order.region.region }}
       {{ order.address.location }}
@@ -27,11 +27,11 @@
 
     <div class="d-flex-column">
       <div class="title">
-        Координаты
+        {{$t('Координаты')}}
       </div>
       <div class="d-flex" @click="showModal(order.address.coordA, order.address.coordB)">
         <a-icon type="link"/>
-        Посмотреть на карте
+        {{$t('Посмотреть на карте')}}
       </div>
 
     </div>

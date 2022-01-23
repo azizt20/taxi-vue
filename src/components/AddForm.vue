@@ -2,10 +2,10 @@
   <div class="AddForm">
     <a-form @submit.prevent="submitRegion" class="form">
       <a-form-item >
-        <label>Добавить район
+        <label>{{$t('Добавить район')}}
           <a-input-search placeholder="Название района" size="large" v-model="addRegion" >
             <a-button slot="enterButton" type="primary" @submit.prevent="submitRegion" html-type="submit">
-              Добавить
+              {{$t('Добавить')}}
             </a-button>
           </a-input-search>
         </label>
@@ -15,7 +15,7 @@
 
     <a-form class="form" @submit.prevent="submitLocation">
       <a-form-item >
-        <label> Выберите регион
+        <label> {{$t('Выберите регион')}}
           <a-select class="select-region" v-model="region" size="large" placeholder="Выберите регион">
             <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
               {{ region.region }}
@@ -26,14 +26,14 @@
 
 
       <a-form-item>
-        <label> Название локации
+        <label> {{$t('Название локации')}}
           <a-input size="large" v-model="location"/>
         </label>
       </a-form-item>
 
 
       <a-form-item>
-        <label> Координаты локации
+        <label> {{ $t('Координаты локации') }}
           <a-row>
             <a-col span="12">
               <a-input size="large" v-model="coordA" placeholder="не выбрана" style="background: #FFFFFF"  disabled/>
@@ -46,7 +46,7 @@
       </a-form-item>
 
       <a-button size="large" type="primary" :disabled="!coordA || !region || !location"  @submit.prevent="submitLocation" html-type="submit">
-        Добавить новую локацию
+        {{$t('Добавить новую локацию')}}
       </a-button>
     </a-form>
 

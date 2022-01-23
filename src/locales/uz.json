@@ -1,0 +1,38 @@
+{
+  "Оформить заказ": "Buyurtma berish",
+  "Добавить локацию": "Lokatsiya qo'shish",
+  "Редактировать локации": "Lokatsiyalarni o'zgartirish",
+  "Информация о заказах": "Buyurma xaqida ma'lumot",
+  "Выйти": "Chiqish",
+  "Время создания заказа": "Buyurtma berish vaqti",
+  "Ф.И.О.": "F.I.Sh.",
+  "Номер заказчика": "Mijozning raqami",
+  "Выберите регион": "Tumanni tanlang",
+  "Выберите локацию": "Lokatsiyani tanlang",
+  "Добавить район": "Tuman qo'shish",
+  "Добавить": "Qo'shish",
+  "Название локации": "Lokatsiya nomi",
+  "Координаты локации": "Lokatsiya koordinatalari",
+  "Добавить новую локацию": "Yangi lokatsiya qo'shish",
+  "Редактировать название локации": "Lokatsiya nomini o'zgartirish",
+  "Новые координаты локации": "Lokatsiyani yangi koordinatalari",
+  "Сохранить изменения": "O'zgarishlarni saqlash",
+  "Клиент": "Mijoz",
+  "Адрес": "Manzil",
+  "Координаты": "Koordinatlar",
+  "В пути": "Yo'lda",
+  "Законченный": "Tuganlangan",
+  "Водители": "Xaydo'vchilar",
+  "Пользователь": "Foydalanuvchi",
+  "Машина": "Moashina",
+  "Номер авто": "Avto raqami",
+  "Зарегистрирован": "Royhatdan o'tgan",
+  "Войти": "Kirirsh",
+  "Логин": "Login",
+  "Пароль": "Parol"
+
+
+
+
+
+}

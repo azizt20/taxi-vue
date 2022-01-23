@@ -3,7 +3,7 @@
     <a-form @submit.prevent="submitEdit" class="form">
 
       <a-form-item>
-        <label> Выберите регион
+        <label> {{$t('Выберите регион')}}
           <a-select class="select-region" v-model="region" @change="changeRegion" size="large"
                     placeholder="Выберите регион">
             <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
@@ -14,7 +14,7 @@
       </a-form-item>
 
       <a-form-item>
-        <label> Выберите локацию
+        <label> {{$t('Выберите локацию')}}
           <a-select size="large" v-model="idLocation" @change="changeLocation" class="select-region" :disabled="!getselectedlocation && !region"
                     placeholder="Выберите регион">
             <a-select-option v-for="location in getlocationByRegion(this.region)" :key="location.url"
@@ -28,7 +28,7 @@
       <hr/>
 
       <a-form-item>
-        <label> Выберите регион
+        <label> {{$t('Выберите регион')}}
           <a-select class="select-region" v-model="newRegion" size="large"
                     placeholder="Выберите регион">
             <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
@@ -40,13 +40,13 @@
 
 
       <a-form-item>
-        <label>Редактировать название локации
+        <label>{{$t('Редактировать название локации')}}
           <a-input v-model="newLocation" size="large"/>
         </label>
       </a-form-item>
 
       <a-form-item>
-        <label> Новые координаты локации
+        <label> {{$t('Новые координаты локации')}}
           <a-row>
             <a-col span="12">
               <a-input size="large" v-model="coordA" placeholder="не выбрана" style="background: #FFFFFF" disabled/>
@@ -60,7 +60,7 @@
 
 
       <a-button @submit.prevent="submitEdit" :disabled="!idLocation || !newRegion" size="large" type="primary" html-type="submit">
-        Сохранить изменения
+        {{$t('Сохранить изменения')}}
       </a-button>
 
     </a-form>
