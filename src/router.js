@@ -13,8 +13,8 @@ const routes = [
     component: CreateOrder,
     meta: {
       title: 'Главная',
-      layout: 'main',
-      requiredAuth: true,
+      layout: 'empty',
+      requiredAuth: false,
     }
   },
   {
@@ -24,7 +24,7 @@ const routes = [
     meta: {
       title: 'Добавить новую локацию',
       layout: 'empty',
-      requiredAuth: true,
+      requiredAuth: false,
     }
   },
   {
@@ -34,7 +34,7 @@ const routes = [
     meta: {
       title: 'Редактировать локации',
       layout: 'empty',
-      requiredAuth: true,
+      requiredAuth: false,
     }
   },
   {
@@ -44,7 +44,7 @@ const routes = [
     meta: {
       title: 'Информация о заказах',
       layout: 'empty',
-      requiredAuth: true,
+      requiredAuth: false,
     }
   },
   {

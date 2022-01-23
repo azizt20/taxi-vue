@@ -1,62 +1,104 @@
 <template>
   <div class="OrderOnfo">
-    <div class="d-flex-column">
-      <a-modal v-model="visible" title="Выбранный адрес">
-<Coords :coord="coord"/>
-      </a-modal>
-      <div class="title">
-        {{ $t('Клиент') }}
-      </div>
-      {{ order.full_name }}
-    </div>
 
-    <div class="d-flex-column">
-      <div class="title">
-        {{$t('Номер заказчика')}}
-      </div>
-      {{ order.phone_number }}
-    </div>
-
-    <div class="d-flex-column">
-      <div class="title">
-        {{$t('Адрес')}}
-      </div>
-      {{ order.region.region }}
-      {{ order.address.location }}
-    </div>
-
-    <div class="d-flex-column">
-      <div class="title">
-        {{$t('Координаты')}}
-      </div>
-      <div class="d-flex" @click="showModal(order.address.coordA, order.address.coordB)">
-        <a-icon type="link"/>
-        {{$t('Посмотреть на карте')}}
-      </div>
-
-    </div>
-
-    {{ order.driver }}
+    <a-row type="flex" justify="space-around" class="w-100">
 
 
-    {{ order.created_at }}
+      <a-col class="d-flex-column">
+        <div class="title">
+          <a-icon type="clock-circle"/>
+          {{ $t('Время') }}
+        </div>
+        {{ date }} <br> {{ time }}
+
+      </a-col>
+
+      <a-col class="d-flex-column">
+        <div class="title">
+          <a-icon type="user"/>
+          {{ $t('Клиент') }}
+        </div>
+        {{ order.full_name }}
+      </a-col>
+
+      <a-col class="d-flex-column">
+        <div class="title">
+          {{ $t('Номер заказчика') }}
+        </div>
+        {{ order.phone_number }}
+      </a-col>
+
+      <a-col class="d-flex-column">
+        <div class="title">
+          {{ $t('Адрес') }}
+        </div>
+        {{ order.region.region }}
+        <br>
+        {{ order.address.location }}
+      </a-col>
+
+      <a-col class="d-flex-column">
+        <div class="title">
+          {{ $t('Координаты') }}
+        </div>
+        <div class="d-flex" @click="showModal(order.address.coordA, order.address.coordB)">
+          <a-icon type="link"/>
+          {{ $t('Посмотреть на карте') }}
+        </div>
+      </a-col>
+
+      <a-col :span="7" v-if="order.driver">
+        <a-row type="flex" justify="space-between">
+          <a-col class="d-flex-column">
+            <div class="title">
+              <a-icon type="user"/>
+              {{ $t('Пользователь') }}
+            </div>
+
+            {{ fullName }}
+
+          </a-col>
+
+          <a-col class="d-flex-column">
+            <div class="title">
+              <a-icon type="phone"/>
+              {{ $t('Номер телефона') }}
+            </div>
+            {{ order.driver.username }}
+            <br/>
+            <div class="" v-if="order.driver.info_driver.phone_number_second != 'null'">
+              {{ order.driver.info_driver.phone_number_second }}
+            </div>
+          </a-col>
+
+
+          <a-col class="d-flex-column">
+            <div class="title">
+              <a-icon type="car"/>
+              {{$t('Машина')}}
+            </div>
+            {{ order.driver.info_driver.car_color }}
+            {{ order.driver.info_driver.car_name }}
+            {{ order.driver.info_driver.car_number }}
+
+          </a-col>
+        </a-row>
+      </a-col>
+
+    </a-row>
 
   </div>
 </template>
 
 <script>
-import Coords from "./Coords";
+
 export default {
   name: "OrderInfo",
-  components:{
-    Coords
-  },
   data() {
     return {
-      visible: false,
-      coordA: '',
-      coordB: '',
-      coord:[this.coordA, this.coordB]
+      date: this.order.created_at.split('T')[0],
+      time: this.order.created_at.split('T')[1].split('.')[0],
+      fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
     }
   },
   props: {
@@ -64,14 +106,6 @@ export default {
       type: Object
     }
   },
-  methods: {
-    showModal(A, B) {
-      this.coordA = A
-      this.coordB = B
-      this.visible = true;
-    },
-
-  }
 
 }
 </script>
@@ -85,20 +119,22 @@ export default {
   .ant-modal-content {
     height: 100% !important;
   }
-  .ant-modal-footer{
+
+  .ant-modal-footer {
     display: none;
   }
 
 }
+
 </style>
 <style scoped lang="scss">
 .OrderOnfo {
+  width: 100%;
   border: 1px solid #2c3e50;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.04), 0 10px 10px rgba(0, 0, 0, 0.02);
   margin-bottom: 20px;
-  display: flex;
   color: black;
 
 

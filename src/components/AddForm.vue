@@ -80,12 +80,8 @@ export default {
       this.coordB = this.getNewCoords[1]
     }
   },
-  mounted() {
-    this.getAllLocations()
-  },
   methods: {
     ...mapMapActions({
-      getAllLocations: 'getAllLocations',
       createRegion: 'addRegion',
       createLocation: 'addLocation',
 

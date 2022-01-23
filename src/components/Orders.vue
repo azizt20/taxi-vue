@@ -6,7 +6,7 @@
         <a-tab-pane key="1">
             <span slot="tab">
         <a-icon type="transaction"/>
-        Заказы
+        {{$t('Заказы')}}
       </span>
           <h2>{{$t('Информация о заказах')}}</h2>
 
@@ -69,7 +69,6 @@ import {createNamespacedHelpers} from 'vuex'
 
 const {
   mapGetters: mapMapGetters,
-  mapActions: mapMapActions,
 } = createNamespacedHelpers('map')
 
 const {
@@ -93,14 +92,11 @@ export default {
     }
   },
   mounted() {
-    this.getAllLocations()
     this.getOrders()
     this.getUsers()
   },
   methods: {
-    ...mapMapActions({
-        getAllLocations: 'getAllLocations'
-    }),
+
     ...mapOrderActions({
       getOrders: 'getOrders',
       getUsers: 'getUsers',

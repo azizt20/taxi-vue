@@ -63,6 +63,7 @@
         {{$t('Сохранить изменения')}}
       </a-button>
 
+
     </a-form>
   </div>
 </template>
@@ -107,13 +108,8 @@ export default {
     }
 
   },
-  mounted() {
-    this.getAllLocations()
-  },
+
   methods: {
-    ...mapMapActions({
-      getAllLocations: 'getAllLocations',
-    }),
     ...mapMapActions({
       editLocation: 'editLocation'
     }),
@@ -174,6 +170,9 @@ export default {
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 0 20px;
 }
 </style>

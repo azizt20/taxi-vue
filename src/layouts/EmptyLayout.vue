@@ -5,8 +5,21 @@
 </template>
 
 <script>
+import {createNamespacedHelpers} from 'vuex'
+
+const {
+  mapActions: mapLayoutsActions,
+} = createNamespacedHelpers('map')
 export default {
-  name: "EmptyLayout"
+  name: "EmptyLayout",
+  mounted() {
+    this.getAllLocations()
+  },
+  methods:{
+    ...mapLayoutsActions({
+      getAllLocations: 'getAllLocations',
+    })
+  }
 }
 </script>
 
