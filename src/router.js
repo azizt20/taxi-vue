@@ -9,11 +9,11 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'order',
-    component: CreateOrder,
+    name: 'login',
+    component: () => import('./views/Login.vue'),
     meta: {
-      title: 'Главная',
-      layout: 'empty',
+      title: 'Login',
+      layout: 'main',
       requiredAuth: false,
     }
   },
@@ -24,7 +24,7 @@ const routes = [
     meta: {
       title: 'Добавить новую локацию',
       layout: 'empty',
-      requiredAuth: false,
+      requiredAuth: true,
     }
   },
   {
@@ -34,7 +34,7 @@ const routes = [
     meta: {
       title: 'Редактировать локации',
       layout: 'empty',
-      requiredAuth: false,
+      requiredAuth: true,
     }
   },
   {
@@ -44,17 +44,27 @@ const routes = [
     meta: {
       title: 'Информация о заказах',
       layout: 'empty',
-      requiredAuth: false,
+      requiredAuth: true,
     }
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('./views/Login.vue'),
+    path: '/panel',
+    name: 'panel',
+    component: () => import('./views/ControlPanel'),
     meta: {
-      title: 'Login',
-      layout: 'main',
-      requiredAuth: false,
+      title: 'Панель конроля',
+      layout: 'empty',
+      requiredAuth: true,
+    }
+  },
+  {
+    path: '/create',
+    name: 'order',
+    component: CreateOrder,
+    meta: {
+      title: 'Главная',
+      layout: 'empty',
+      requiredAuth: true,
     }
   }
 ]

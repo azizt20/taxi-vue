@@ -8,16 +8,26 @@
 import {createNamespacedHelpers} from 'vuex'
 
 const {
-  mapActions: mapLayoutsActions,
+  mapActions: mapMapActions,
 } = createNamespacedHelpers('map')
+
+const {
+  mapActions: mapOrderActions,
+} = createNamespacedHelpers('order')
 export default {
   name: "EmptyLayout",
   mounted() {
     this.getAllLocations()
+    this.getCategory()
+    this.getCars()
   },
   methods:{
-    ...mapLayoutsActions({
+    ...mapMapActions({
       getAllLocations: 'getAllLocations',
+    }),
+    ...mapOrderActions({
+      getCategory: 'getCategory',
+      getCars: 'getCars',
     })
   }
 }

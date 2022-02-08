@@ -87,12 +87,11 @@ export default {
   height: 100%;
 }
 
-#components-form-demo-normal-login .login-form {
-  max-width: 300px;
-}
-
-#components-form-demo-normal-login .login-form-forgot {
-  float: right;
+label{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: -20px;
 }
 
 #components-form-demo-normal-login .login-form-button {

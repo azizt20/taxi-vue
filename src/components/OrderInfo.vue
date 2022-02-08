@@ -9,7 +9,7 @@
           <a-icon type="clock-circle"/>
           {{ $t('Время') }}
         </div>
-        {{ date }} <br> {{ time }}
+        {{ order.created_at.split('T')[0] }} <br> {{ order.created_at.split('T')[1].split('.')[0] }}
 
       </a-col>
 
@@ -96,8 +96,8 @@ export default {
   name: "OrderInfo",
   data() {
     return {
-      date: this.order.created_at.split('T')[0],
-      time: this.order.created_at.split('T')[1].split('.')[0],
+      // date: this.order.created_at.split('T')[0],
+      // time: this.order.created_at.split('T')[1].split('.')[0],
       fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
     }
   },
