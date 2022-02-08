@@ -123,7 +123,7 @@ export default {
       this.idLocation = ""
     },
     submitOrder() {
-      this.createCategories({
+      this.createOrder({
         full_name: this.clientName,
         phone_number: "+998" + this.phoneNomber,
         address: this.idLocation,
