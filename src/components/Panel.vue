@@ -96,7 +96,7 @@
           </a-button>
 
           <div v-for="color in getAllColors" :key="color.url">
-            <label > {{color.name}}</label>
+            <label style="margin: 0" > {{color.name}}</label>
             <input style="margin-left: 10px" type="color" :value="color.code" disabled>
 
           </div>
