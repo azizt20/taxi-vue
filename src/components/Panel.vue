@@ -204,6 +204,7 @@ export default {
   display: flex;
   padding: 20px 50px 40px;
   font-size: 16px;
+  overflow-y: scroll;
 
   label, input {
     font-weight: bold;
