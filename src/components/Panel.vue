@@ -210,6 +210,7 @@ export default {
     padding-bottom: 30px;
   }
 
+
   label, input {
     font-weight: bold;
     font-size: 18px;
