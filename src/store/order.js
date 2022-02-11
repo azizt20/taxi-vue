@@ -38,6 +38,9 @@ export default {
         getAllUsers: state => {
             return state.allUsers
         },
+        getSearchUsers: state => (searchText) => {
+            return state.allUsers.filter(order => order.username.includes(searchText));
+        },
         getUserById: state => (id) => {
             return state.allUsers.find(user => user.pk === id);
         },
@@ -89,7 +92,8 @@ export default {
                         const id = getId(res.data.url)
                         dispatch('sendOrder', {
                             type: "send_order",
-                            order_id: id
+                            order_id: id,
+                            user_id: ''
                         })
                         resolve()
                     })
@@ -145,9 +149,13 @@ export default {
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
+                console.log(state.websocekt);
+
             };
             state.websocekt.onmessage = (e) => {
                 console.log(e)
+                console.log(state.websocekt);
+
             }
         },
 

@@ -33,5 +33,17 @@
   "Зарегистрирован": "Royhatdan o'tgan",
   "Войти": "Kirirsh",
   "Логин": "Login",
-  "Пароль": "Parol"
+  "Пароль": "Parol",
+  "создать": "yaratish",
+  "обновить": "yangilash",
+  "добавить машину": "mashina qo'shing",
+  "Добавление новых машин": "Yangi mashinalarni qo'shish",
+  "Введите цвет": "Rangni kiriting",
+  "Добавление новых цветов": "Yangi ranglar qo'shish",
+  "добавить машину": "moshina q'oshish",
+  "Введите код цвета или выберите из палитры": "Rang kodini kiriting yoki palitradan tanlang",
+  "Выберите категорию": "Kategoriyani tanlang",
+  "Выберите категорию": "Kategoriyani tanlang",
+  "Изменение прежних категорий": "Oldingi kategoriyani o'zgartirish",
+  "Создание новой категории": "Yangi kategoriya yaratish"
 }

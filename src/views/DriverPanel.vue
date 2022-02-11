@@ -1,18 +1,13 @@
 <template>
-  <div class="CreateOrder">
+  <div class="DriverPanel">
 
     <a-layout class="h-100 w-100">
       <a-layout-header class="header">
         <Header/>
       </a-layout-header>
-      <a-layout>
-        <a-layout-sider class="slider">
-          <OrderForm/>
-        </a-layout-sider>
-        <a-layout-content class="content">
-          <Map/>
-        </a-layout-content>
-      </a-layout>
+      <a-layout-content class="content">
+        <DriverForm/>
+      </a-layout-content>
       <a-layout-footer class="footer">
         <Footer/>
       </a-layout-footer>
@@ -22,17 +17,15 @@
 </template>
 
 <script>
-import Map from "../components/Map";
 import Header from "../components/Header";
-import OrderForm from "../components/OrderForm";
 import Footer from "../components/Footer";
+import DriverForm from "../components/DriverForm";
 
 export default {
-  name: "Order",
+  name: "ControlPanel",
   components: {
-    Map,
     Header,
-    OrderForm,
+    DriverForm,
     Footer
   },
 }
@@ -40,13 +33,12 @@ export default {
 
 <style scoped>
 
-.CreateOrder {
+.DriverPanel {
   height: 100%;
   background: transparent;
-
 }
 
-.header, .slider, .footer, .content{
+.header, .slider, .footer, .content {
   background: transparent;
 }
 

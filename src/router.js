@@ -58,6 +58,16 @@ const routes = [
     }
   },
   {
+    path: '/driver',
+    name: 'driver',
+    component: () => import('./views/DriverPanel'),
+    meta: {
+      title: 'Водитель',
+      layout: 'empty',
+      requiredAuth: true,
+    }
+  },
+  {
     path: '/create',
     name: 'order',
     component: CreateOrder,

@@ -1,11 +1,11 @@
 <template>
   <div class="Panel">
 
-    <a-row class="w-100">
+    <a-row class="w-100 content" >
       <a-col :lg="{ span: 6, offset: 2 }">
 
         <h3>
-          Создание новой категории
+          {{$t('Создание новой категории')}}
         </h3>
         <a-form @submit.prevent="createCategory" class="form">
           <a-checkbox-group class="w-100" v-model="cars">
@@ -19,7 +19,7 @@
           <a-input size="large" v-model="name" placeholder="Введите название категории" style="background: #FFFFFF"/>
           <br>
           <a-button @submit.prevent="createCategory" :disabled="!name || !cars" size="large" type="primary"
-                    html-type="submit">создать
+                    html-type="submit">{{$t('создать')}}
           </a-button>
         </a-form>
       </a-col>
@@ -27,7 +27,7 @@
 
       <a-col :lg="{ span: 6, offset: 1 }">
         <h3>
-          Изменение прежних категорий
+          {{$t('Изменение прежних категорий')}}
         </h3>
         <a-form @submit.prevent="editCategory" class="form">
           <a-form-item>
@@ -55,7 +55,7 @@
           <br>
           <a-button @submit.prevent="editCategory" :disabled="!editName || !categotyCars || !chooseCategory"
                     size="large"
-                    type="primary" html-type="submit">обновить
+                    type="primary" html-type="submit">{{$t('обновить')}}
           </a-button>
         </a-form>
       </a-col>
@@ -63,36 +63,36 @@
 
       <a-col :lg="{ span: 6, offset: 1 }">
         <h3>
-          Добавление новых машин
+          {{$t('Добавление новых машин')}}
         </h3>
 
         <a-form @submit.prevent="createCar" class="form">
-          <label> {{ $t('добавить машину ') }}
+          <label> {{ $t('добавить машину') }}
             <a-input size="large" v-model="newCar" placeholder="Введите название машины" style="background: #FFFFFF"/>
           </label>
           <a-button @submit.prevent="createCar" :disabled="!newCar" size="large"
-                    type="primary" html-type="submit">создать
+                    type="primary" html-type="submit">{{ $t('создать') }}
           </a-button>
         </a-form>
 
 
         <h3>
-          Добавление новых цветов
+          {{$t('Добавление новых цветов')}}
         </h3>
         <a-form @submit.prevent="createColor" class="form">
 
-          <label >Введите цвет
+          <label >{{$t('Введите цвет')}}
             <a-input size="large" v-model="colorName" placeholder="Введите название цвета" style="background: #FFFFFF"/>
 
           </label>
-          <label > Введите код цвета или выберите из палитры
+          <label > {{$t('Введите код цвета или выберите из палитры')}}
             <input type="text" class="ant-input ant-input-lg" v-model="colorCode">
             <input type="color" class="ant-input ant-input-lg" v-model="colorCode">
           </label>
 
 
           <a-button @submit.prevent="createColor" :disabled="!colorName" size="large"
-                    type="primary" html-type="submit">создать
+                    type="primary" html-type="submit">{{ $t('создать') }}
           </a-button>
 
           <div v-for="color in getAllColors" :key="color.url">
@@ -204,6 +204,11 @@ export default {
   display: flex;
   padding: 20px 50px 40px;
   font-size: 16px;
+  overflow-y: scroll;
+
+  .form{
+    padding-bottom: 30px;
+  }
 
   label, input {
     font-weight: bold;
