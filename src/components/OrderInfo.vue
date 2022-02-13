@@ -39,15 +39,15 @@
 
       <a-col class="d-flex-column">
         <div class="title">
-          {{ $t('Координаты') }}
+          {{ $t('Категория') }}
         </div>
-        <div class="d-flex" @click="showModal(order.address.coordA, order.address.coordB)">
-          <a-icon type="link"/>
-          {{ $t('Посмотреть на карте') }}
+        <div class="d-flex">
+          {{ getCategoryByUrl(order.category).name }} -
+          {{ getCategoryByUrl(order.category).cost }} сум
         </div>
       </a-col>
 
-      <a-col :span="7" v-if="order.driver">
+      <a-col :span="10" v-if="order.driver">
         <a-row type="flex" justify="space-between">
           <a-col class="d-flex-column">
             <div class="title">
@@ -75,11 +75,15 @@
           <a-col class="d-flex-column">
             <div class="title">
               <a-icon type="car"/>
-              {{$t('Машина')}}
+              {{ $t('Машина') }}
             </div>
-            {{ order.driver.info_driver.car_color }}
-            {{ order.driver.info_driver.car_name }}
-            {{ order.driver.info_driver.car_number }}
+
+            <div class="d-flex">
+              <input type="color" v-model="color" style="width: 25px; margin-right: 5px;" disabled>
+              {{ order.driver.info_driver.car_color.name }} -
+              {{ order.driver.info_driver.car_name.name }}
+              {{ order.driver.info_driver.car_number }}
+            </div>
 
           </a-col>
         </a-row>
@@ -92,14 +96,23 @@
 
 <script>
 
+import {createNamespacedHelpers} from "vuex";
+
+const {
+  mapGetters: mapOrderGetters,
+} = createNamespacedHelpers('order')
 export default {
   name: "OrderInfo",
   data() {
     return {
-      // date: this.order.created_at.split('T')[0],
-      // time: this.order.created_at.split('T')[1].split('.')[0],
+      color: this.order.driver.info_driver.car_color.code,
       fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
     }
+  },
+  computed: {
+    ...mapOrderGetters({
+      getCategoryByUrl: 'getCategoryByUrl'
+    })
   },
   props: {
     order: {

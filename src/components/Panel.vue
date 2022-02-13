@@ -1,11 +1,11 @@
 <template>
   <div class="Panel">
 
-    <a-row class="w-100 content" >
+    <a-row class="w-100 content">
       <a-col :lg="{ span: 6, offset: 2 }">
 
         <h3>
-          {{$t('Создание новой категории')}}
+          {{ $t('Создание новой категории') }}
         </h3>
         <a-form @submit.prevent="createCategory" class="form">
           <a-checkbox-group class="w-100" v-model="cars">
@@ -15,11 +15,23 @@
               </a-checkbox>
             </div>
           </a-checkbox-group>
-          <br>
-          <a-input size="large" v-model="name" placeholder="Введите название категории" style="background: #FFFFFF"/>
-          <br>
-          <a-button @submit.prevent="createCategory" :disabled="!name || !cars" size="large" type="primary"
-                    html-type="submit">{{$t('создать')}}
+          <label>Название категории
+            <a-input size="large" v-model="name" placeholder="Введите название категории" style="background: #FFFFFF"/>
+          </label>
+          <div class="d-flex">
+            <label>Стоимость
+              <a-input size="large" type="number" v-model="cost" placeholder="Введите стоимость"
+                       style="background: #FFFFFF"/>
+            </label>
+
+            <label>Процент
+              <a-input size="large" type="number" v-model="percent" placeholder="Введите процент"
+                       style="background: #FFFFFF"/>
+            </label>
+          </div>
+
+          <a-button @submit.prevent="createCategory" :disabled="!name || !cars || !cost || !percent" size="large" type="primary"
+                    html-type="submit">{{ $t('создать') }}
           </a-button>
         </a-form>
       </a-col>
@@ -27,7 +39,7 @@
 
       <a-col :lg="{ span: 6, offset: 1 }">
         <h3>
-          {{$t('Изменение прежних категорий')}}
+          {{ $t('Изменение прежних категорий') }}
         </h3>
         <a-form @submit.prevent="editCategory" class="form">
           <a-form-item>
@@ -48,14 +60,27 @@
               </a-checkbox>
             </div>
           </a-checkbox-group>
-          <br>
-          <a-input size="large" v-model="editName" placeholder="Введите название категории"
-                   style="background: #FFFFFF"/>
+          <label>Новое название категории
+            <a-input size="large" v-model="editName" placeholder="Введите название категории"
+                     style="background: #FFFFFF"/>
+          </label>
 
-          <br>
-          <a-button @submit.prevent="editCategory" :disabled="!editName || !categotyCars || !chooseCategory"
+          <div class="d-flex">
+            <label>Стоимость
+              <a-input size="large" type="number" v-model="editCost" placeholder="Введите стоимость"
+                       style="background: #FFFFFF"/>
+            </label>
+
+            <label>Процент
+              <a-input size="large" type="number" v-model="editPercent" placeholder="Введите процент"
+                       style="background: #FFFFFF"/>
+            </label>
+
+
+          </div>
+          <a-button @submit.prevent="editCategory" :disabled="!editName || !categotyCars || !chooseCategory || !editCost || ! editPercent"
                     size="large"
-                    type="primary" html-type="submit">{{$t('обновить')}}
+                    type="primary" html-type="submit">{{ $t('обновить') }}
           </a-button>
         </a-form>
       </a-col>
@@ -63,7 +88,7 @@
 
       <a-col :lg="{ span: 6, offset: 1 }">
         <h3>
-          {{$t('Добавление новых машин')}}
+          {{ $t('Добавление новых машин') }}
         </h3>
 
         <a-form @submit.prevent="createCar" class="form">
@@ -77,15 +102,15 @@
 
 
         <h3>
-          {{$t('Добавление новых цветов')}}
+          {{ $t('Добавление новых цветов') }}
         </h3>
         <a-form @submit.prevent="createColor" class="form">
 
-          <label >{{$t('Введите цвет')}}
+          <label>{{ $t('Введите цвет') }}
             <a-input size="large" v-model="colorName" placeholder="Введите название цвета" style="background: #FFFFFF"/>
 
           </label>
-          <label > {{$t('Введите код цвета или выберите из палитры')}}
+          <label> {{ $t('Введите код цвета или выберите из палитры') }}
             <input type="text" class="ant-input ant-input-lg" v-model="colorCode">
             <input type="color" class="ant-input ant-input-lg" v-model="colorCode">
           </label>
@@ -96,7 +121,7 @@
           </a-button>
 
           <div v-for="color in getAllColors" :key="color.url">
-            <label style="margin: 0" > {{color.name}}</label>
+            <label style="margin: 0"> {{ color.name }}</label>
             <input style="margin-left: 10px" type="color" :value="color.code" disabled>
 
           </div>
@@ -126,8 +151,12 @@ export default {
     return {
       cars: '',
       name: '',
+      cost: '',
+      percent: '',
       chooseCategory: '',
       editName: '',
+      editCost: '',
+      editPercent: '',
       categotyCars: '',
       newCar: '',
       colorCode: '#000000',
@@ -138,11 +167,13 @@ export default {
     chooseCategory: function () {
       this.categotyCars = this.getCategoryByUrl(this.chooseCategory).car
       this.editName = this.getCategoryByUrl(this.chooseCategory).name
+      this.editCost = this.getCategoryByUrl(this.chooseCategory).cost
+      this.editPercent = this.getCategoryByUrl(this.chooseCategory).percent
     }
   },
   mounted() {
     this.getColors()
-    },
+  },
 
   methods: {
     ...mapOrderActions({
@@ -155,20 +186,28 @@ export default {
     createCategory() {
       this.postCategory({
         name: this.name,
-        car: this.cars
+        car: this.cars,
+        percent: this.percent,
+        cost: this.cost
       });
       this.name = ""
       this.cars = ""
+      this.percent = ""
+      this.cost = ""
     },
     editCategory() {
       this.putCategory({
         url: this.chooseCategory,
         name: this.editName,
-        car: this.categotyCars
+        car: this.categotyCars,
+        percent: this.editPercent,
+        cost: this.editCost,
       })
       this.editName = ""
       this.categotyCars = ""
       this.chooseCategory = ""
+      this.editPercent = ""
+      this.editCost = ""
     },
     createCar() {
       this.postCar({
@@ -176,7 +215,7 @@ export default {
       })
       this.newCar = ''
     },
-    createColor(){
+    createColor() {
       this.postColor({
         name: this.colorName,
         code: this.colorCode,
@@ -206,7 +245,7 @@ export default {
   font-size: 16px;
   overflow-y: scroll;
 
-  .form{
+  .form {
     padding-bottom: 30px;
   }
 
@@ -221,12 +260,13 @@ export default {
     margin-top: 10px;
   }
 
-  h3{
+  h3 {
     font-weight: bold;
     font-size: 25px;
     color: #2c3e50;
-    padding: 40px 0 0 ;
+    padding: 40px 0 0;
   }
+
   .chackbox-div {
     text-align: start;
 

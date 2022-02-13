@@ -38,17 +38,17 @@ export default {
         getAllUsers: state => {
             return state.allUsers
         },
-        getSearchUsers: state => (searchText) => {
+        getSearchUsersByUsername: state => (searchText) => {
             return state.allUsers.filter(order => order.username.includes(searchText));
+        },
+        getSearchUsersByCarNumber: state => (number) => {
+            return state.allUsers.filter(order => order.info_driver.car_number.includes(number));
         },
         getUserById: state => (id) => {
             return state.allUsers.find(user => user.pk === id);
         },
         getUserByUrl: state => (url) => {
             return state.allUsers.find(user => user.url === url);
-        },
-        getCarByUrl: state => (url) => {
-            return state.cars.find(user => user.url === url);
         },
         getCategoryByUrl: state => (url) => {
             return state.category.find(user => user.url === url);
@@ -132,7 +132,7 @@ export default {
                     })
             })
         },
-        async putCategory({dispatch}, newCategory){
+        async putCategory({dispatch}, newCategory) {
             await new Promise((resolve) => {
                 const id = getId(newCategory.url)
                 apiRequest
@@ -215,9 +215,33 @@ export default {
                 apiRequest
                     .get('/admin/color/')
                     .then(res => {
-                            commit('SET_ALL_COLORS', res.data)
+                        commit('SET_ALL_COLORS', res.data)
                         resolve()
                     })
+            })
+        },
+
+
+        async patchBalance(state, balance) {
+            await new Promise((resolve) => {
+                apiRequest
+                    .patch(`/admin/driver/${balance.id}/`, balance)
+                    .then(res => {
+                        alert("Баланс пользователя был пополнен благоплучно \n текуший баланс " + res.data.balance)
+                        resolve()
+                    })
+            })
+        },
+
+
+        async patchDriverInfo(state, info) {
+            await new Promise((resolve) => {
+                apiRequest
+                    .patch(`/admin/driver/${info.id}/`, info)
+                    .then(
+                        alert("Ваши изменеия были сохранены"),
+                        resolve()
+                    )
             })
         },
 

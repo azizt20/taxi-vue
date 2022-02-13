@@ -31,8 +31,11 @@
           <a-icon type="car"/>
           {{ $t('Машина') }}
         </div>
-        {{ driver.info_driver.car_color }}
-        {{ driver.info_driver.car_name }}
+        <div class="d-flex">
+          <input type="color" v-model="color" style="width: 25px; margin-right: 5px;"  disabled>
+          {{ driver.info_driver.car_color.name }} -
+          {{ driver.info_driver.car_name.name }}
+        </div>
       </a-col>
 
       <a-col class="d-flex-column">
@@ -61,6 +64,7 @@ export default {
   name: "DriverInfo",
   data() {
     return {
+      color: this.driver.info_driver.car_color.code,
       date: this.driver.date_joined.split('T')[0],
       time: this.driver.date_joined.split('T')[1].split('.')[0],
       fullName: this.driver.info_driver.last_name + ' ' + this.driver.info_driver.first_name + ' ' + this.driver.info_driver.second_name
