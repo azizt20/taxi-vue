@@ -70,6 +70,7 @@
         <div class="info">Дата регистрации <b>{{ date }}</b></div>
         <div class="info">Марка машины : <b>{{ car }}</b></div>
         <div class="info">Цвет машины : <b> {{ color.name }}</b></div>
+        <div class="info">Номер машины : <b> {{ carNumber }}</b></div>
 
         <a href='https://api.azizt20.uz/admin/taxi_api/driver/' target="_blank">Изменить через админ панель</a>
           <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
@@ -117,10 +118,6 @@
 
           <label class="d-flex"> 2-ой номер телефона
             <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="secondNumber"/>
-          </label>
-
-          <label class="d-flex"> Номер машины
-            <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="carNumber"/>
           </label>
 
           <a-button @submit.prevent="submitEdit" style="margin-right: 20px" :disabled="!acces" size="large"
@@ -258,7 +255,6 @@ export default {
         las_name: this.las_name,
         phone_number: this.firstNumber,
         phone_number_second: this.secondNumber,
-        car_number: this.carNumber,
       })
     }
 
