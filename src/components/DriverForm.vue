@@ -130,7 +130,7 @@
 
     </div>
 
-<div v-if="user">
+<div v-if="user" style="font-size: 16px !important">
   <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
     <OrderInfo :order="orderr(order)"/>
   </div>
