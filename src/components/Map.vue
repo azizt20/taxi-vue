@@ -1,6 +1,6 @@
 <template>
   <div class="yandex-map">
-    <yandex-map class="yandex-map" zoom="12" :coords=newCoords @click="onClick">
+    <yandex-map class="yandex-map" zoom="13" :coords=newCoords @click="onClick">
 
       <div v-for="info in getlocations" :key="info.url">
         <ymap-marker
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       selecredLocation: "",
-      newCoords: [41.3082,69.2598],
+      newCoords: [39.903504, 66.265035],
       markerIcon: {
         layout: 'default#imageWithContent',
         imageSize: [43, 43],
