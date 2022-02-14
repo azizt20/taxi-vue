@@ -72,7 +72,7 @@
         <div class="info">Цвет машины : <b> {{ color.name }}</b></div>
 
         <a href='https://api.azizt20.uz/admin/taxi_api/driver/' target="_blank">Изменить через админ панель</a>
-        <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
+          <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
 
         <h1 style="margin-top: 50px">Пополнить баланс пользователя</h1>
 
@@ -200,9 +200,11 @@ export default {
     phone: function () {
       this.user = ''
       this.dataSource = this.searchByUsername(this.phone)
-      this.dataSource = this.searchByUsername(this.phone)
       if (this.dataSource.length === 1 && this.dataSource[0].username === this.phone) {
-        this.carNumber = this.dataSource[0].info_driver.car_number && ""
+        this.carNumber = this.dataSource[0].info_driver.car_number
+        if (!this.dataSource[0].info_driver.car_number){
+          this.carNumber = ''
+        }
         this.user = this.dataSource[0]
       }
     },
