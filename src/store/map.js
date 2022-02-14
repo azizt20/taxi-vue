@@ -76,6 +76,7 @@ export default {
                         commit('SET_LOCATIONS', res.data)
                         resolve()
                     })
+
             })
         },
 

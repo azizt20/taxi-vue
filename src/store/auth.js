@@ -1,6 +1,7 @@
 import apiRequest from "../utils/apiRequest";
 import router from "../router";
 
+
 export default {
     namespaced: true,
     state: {
@@ -71,6 +72,7 @@ export default {
                         resolve();
                     })
                     .catch((error) => {
+                        commit('REMOVE_TOKEN');
                         reject(error);
                     });
             })

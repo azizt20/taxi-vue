@@ -104,9 +104,11 @@ const {
 export default {
   name: "OrderInfo",
   data() {
-    return {
-      color: this.order.driver.info_driver.car_color.code,
-      fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
+    if (this.order.driver) {
+      return {
+        color: this.order.driver.info_driver.car_color.code,
+        fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
+      }
     }
   },
   computed: {

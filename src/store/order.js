@@ -35,6 +35,9 @@ export default {
         getOrdersByStatus: state => (status) => {
             return state.allOrders.filter(order => order.status === status);
         },
+        getOrdersByDriver: state => (receiver) => {
+            return state.allOrders.filter(order => order.receiver === receiver);
+        },
         getAllUsers: state => {
             return state.allUsers
         },

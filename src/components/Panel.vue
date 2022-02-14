@@ -149,7 +149,7 @@ export default {
   name: "Panel",
   data() {
     return {
-      cars: '',
+      cars: [],
       name: '',
       cost: '',
       percent: '',
@@ -157,7 +157,7 @@ export default {
       editName: '',
       editCost: '',
       editPercent: '',
-      categotyCars: '',
+      categotyCars: [],
       newCar: '',
       colorCode: '#000000',
       colorName: '',
@@ -191,7 +191,7 @@ export default {
         cost: this.cost
       });
       this.name = ""
-      this.cars = ""
+      this.cars = []
       this.percent = ""
       this.cost = ""
     },
@@ -204,7 +204,7 @@ export default {
         cost: this.editCost,
       })
       this.editName = ""
-      this.categotyCars = ""
+      this.categotyCars = []
       this.chooseCategory = ""
       this.editPercent = ""
       this.editCost = ""

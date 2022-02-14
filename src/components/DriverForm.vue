@@ -130,6 +130,13 @@
 
     </div>
 
+<div v-if="user">
+  <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
+    <OrderInfo :order="orderr(order)"/>
+  </div>
+</div>
+
+
 
   </div>
 </template>
@@ -138,14 +145,22 @@
 
 
 import {createNamespacedHelpers} from "vuex";
+import OrderInfo from "./OrderInfo";
 
 const {
   mapActions: mapOrderActions,
   mapGetters: mapOrderGetters,
 } = createNamespacedHelpers('order')
 
+const {
+  mapGetters: mapMapGetters,
+} = createNamespacedHelpers('map')
+
 export default {
   name: "DriverForm",
+  components:{
+    OrderInfo
+  },
   data() {
     return {
       phone: '',
@@ -170,7 +185,13 @@ export default {
       searchByUsername: 'getSearchUsersByUsername',
       searchByCarNumber: 'getSearchUsersByCarNumber',
       allCars: 'getAllCars',
+      OrdersByDriver: 'getOrdersByDriver',
+      UserByUrl: 'getUserByUrl',
     }),
+    ...mapMapGetters({
+      locationByUrl: 'getlocationByUrl',
+      RegionByUrl: 'getRegionByUrl'
+    })
   },
   watch: {
     phone: function () {
@@ -206,7 +227,7 @@ export default {
   },
   mounted() {
     this.getUsers()
-    document.querySelector('#driverNumber input').setAttribute('type', 'number')
+    // document.querySelector('#driverNumber input').setAttribute('type', 'number')
   },
   methods: {
     ...mapOrderActions({
@@ -233,11 +254,20 @@ export default {
         phone_number_second: this.secondNumber,
         car_number: this.carNumber,
       })
-    }
+    },
+    orderr(orderr) {
+      return {
+        ...orderr,
+        driver: this.UserByUrl(orderr.receiver),
+        address: this.locationByUrl(orderr.address),
+        region: this.RegionByUrl(this.locationByUrl(orderr.address).addr)
+      }
+    },
   },
 
 }
 </script>
+
 
 <style lang="scss" scoped>
 .Driver {
@@ -290,5 +320,6 @@ export default {
 
   }
 }
+
 
 </style>

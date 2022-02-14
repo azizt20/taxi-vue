@@ -10,15 +10,14 @@
       </span>
           <h2>{{ $t('Информация о заказах') }}</h2>
 
-          <a-tabs default-active-key="1" size="large"
-                  @change="callback">
+          <a-tabs default-active-key="1" size="large">
             <a-tab-pane key="1" style>
             <span slot="tab">
               <a-icon type="sync" spin/>
               {{ $t('В Ожидании') }}
             </span>
               <h2>Спаиок заказов которые "В ожидании" </h2>
-              <div v-for="order in getOrdersByStatus(waiting)" :key="order">
+              <div v-for="order in getOrdersByStatus(waiting)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
               </div>
             </a-tab-pane>
@@ -28,7 +27,7 @@
               {{ $t('В пути') }}
             </span>
               <h2>Спаиок заказов которые "В процессе" </h2>
-              <div v-for="order in this.getOrdersByStatus(inProgress)" :key="order">
+              <div v-for="order in this.getOrdersByStatus(inProgress)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
                 <br/>
               </div>
@@ -39,7 +38,7 @@
               {{ $t('Законченный') }}
             </span>
               <h2>Спаиок заказов которые "Завершены" </h2>
-              <div v-for="order in this.getOrdersByStatus(done)" :key="order">
+              <div v-for="order in this.getOrdersByStatus(done)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
               </div>
             </a-tab-pane>
@@ -54,7 +53,7 @@
       </span>
           <h2>Информация о водителях</h2>
 
-          <div v-for="driver in getAllUsers" :key="driver">
+          <div v-for="driver in getAllUsers" :key="driver.url">
             <DriverInfo :driver="driver"/>
           </div>
         </a-tab-pane>

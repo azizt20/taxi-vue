@@ -1,7 +1,7 @@
 <template>
   <div class="Header ">
     <div></div>
-    <row>
+    <a-row>
       <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="create"> {{ $t('Оформить заказ') }}
       </router-link>
       <router-link class="link" style="padding: 5px 10px; margin: auto 20px" to="add"> {{ $t('Добавить локацию') }}
@@ -30,7 +30,7 @@
 
       </a-select>
 
-    </row>
+    </a-row>
     <a-button type="danger" @click="logoutt">
       {{ $t('Выйти') }}
     </a-button>
@@ -39,7 +39,12 @@
 
 <script>
 
-import router from "../router";
+
+import {createNamespacedHelpers} from "vuex";
+
+const {
+  mapActions: mapAuthActions,
+} = createNamespacedHelpers('auth')
 
 export default {
   name: "Header",
@@ -49,8 +54,12 @@ export default {
     }
   },
   methods: {
+    ...mapAuthActions({
+      logout: 'logout'
+    })
+    ,
     logoutt() {
-      router.push({name: 'login'})
+      this.logout()
     },
     handleChange() {
       localStorage.setItem('lang', this.lang)
