@@ -36,7 +36,7 @@ export default {
             return state.allOrders.filter(order => order.status === status);
         },
         getOrdersByDriver: state => (receiver) => {
-            return state.allOrders.filter(order => order.receiver === receiver);
+            return state.allOrders.filter(order => order && order.receiver === receiver);
         },
         getAllUsers: state => {
             return state.allUsers
@@ -45,7 +45,7 @@ export default {
             return state.allUsers.filter(order => order.username.includes(searchText));
         },
         getSearchUsersByCarNumber: state => (number) => {
-            return state.allUsers.filter(order => order.info_driver.car_number.includes(number));
+            return state.allUsers.filter(order => order.info_driver.car_number && order.info_driver.car_number.includes(number));
         },
         getUserById: state => (id) => {
             return state.allUsers.find(user => user.pk === id);

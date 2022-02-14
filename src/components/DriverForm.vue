@@ -1,6 +1,5 @@
 <template>
   <div class="Driver ">
-
     <div class="w-100 d-flex j-c-a">
       <a-form-item>
         <label> Поиск пользователя по <b>номеру телефона</b>
@@ -16,6 +15,7 @@
                 placeholder="Номер водителя"
                 option-label-prop="value"
                 v-model="phone"
+
             >
               <template slot="dataSource">
                 <a-select-option v-for="data in dataSource" :key="data.username" :value="data.username">
@@ -69,7 +69,9 @@
         <div class="info">Зарегистрирован по номеру <b>+{{ phone }}</b></div>
         <div class="info">Дата регистрации <b>{{ date }}</b></div>
         <div class="info">Марка машины : <b>{{ car }}</b></div>
-        <div class="info">Цвет машины : <b>  {{ color.name }}</b></div>
+        <div class="info">Цвет машины : <b> {{ color.name }}</b></div>
+
+        <a href='https://api.azizt20.uz/admin/taxi_api/driver/' target="_blank">Изменить через админ панель</a>
         <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
 
         <h1 style="margin-top: 50px">Пополнить баланс пользователя</h1>
@@ -77,7 +79,7 @@
         <a-form @submit.prevent="submitBalance" class="form" style="align-items: start;">
 
           <label class="flex-column"> На какую сумму пополнить ?
-            <a-input size="large"  type="number" style="margin: 20px 0 0" v-model="cash"/>
+            <a-input size="large" type="number" style="margin: 20px 0 0" v-model="cash"/>
           </label>
 
           <a-button @submit.prevent="submitBalance" :disabled="!cash" size="large" type="primary" html-type="submit">
@@ -121,7 +123,8 @@
             <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="carNumber"/>
           </label>
 
-          <a-button @submit.prevent="submitEdit" style="margin-right: 20px" :disabled="!acces" size="large" type="primary" html-type="submit">
+          <a-button @submit.prevent="submitEdit" style="margin-right: 20px" :disabled="!acces" size="large"
+                    type="primary" html-type="submit">
             {{ $t('Сохранить изменеия') }}
           </a-button>
 
@@ -130,12 +133,12 @@
 
     </div>
 
-<div v-if="user" style="font-size: 16px !important">
-  <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
-    <OrderInfo :order="orderr(order)"/>
-  </div>
-</div>
 
+    <!--    <div v-if="OrdersByDriver(user.url)">-->
+    <!--      <div v-for="order in OrdersByDriver(user.url)" :key="order.url">-->
+    <!--        <OrderInfo :order="orderr(order)"/>-->
+    <!--      </div>-->
+    <!--    </div>-->
 
 
   </div>
@@ -145,7 +148,7 @@
 
 
 import {createNamespacedHelpers} from "vuex";
-import OrderInfo from "./OrderInfo";
+// import OrderInfo from "./OrderInfo";
 
 const {
   mapActions: mapOrderActions,
@@ -158,8 +161,8 @@ const {
 
 export default {
   name: "DriverForm",
-  components:{
-    OrderInfo
+  components: {
+    // OrderInfo
   },
   data() {
     return {
@@ -197,8 +200,9 @@ export default {
     phone: function () {
       this.user = ''
       this.dataSource = this.searchByUsername(this.phone)
+      this.dataSource = this.searchByUsername(this.phone)
       if (this.dataSource.length === 1 && this.dataSource[0].username === this.phone) {
-        this.carNumber = this.dataSource[0].info_driver.car_number
+        this.carNumber = this.dataSource[0].info_driver.car_number && ""
         this.user = this.dataSource[0]
       }
     },
@@ -227,7 +231,7 @@ export default {
   },
   mounted() {
     this.getUsers()
-    // document.querySelector('#driverNumber input').setAttribute('type', 'number')
+    document.querySelector('#driverNumber input').setAttribute('type', 'number')
   },
   methods: {
     ...mapOrderActions({
@@ -244,7 +248,7 @@ export default {
       )
       this.cash = ''
     },
-    submitEdit(){
+    submitEdit() {
       this.editInfo({
         id: this.user.info_driver.id,
         first_name: this.first_name,
@@ -254,7 +258,9 @@ export default {
         phone_number_second: this.secondNumber,
         car_number: this.carNumber,
       })
-    },
+    }
+
+    ,
     orderr(orderr) {
       return {
         ...orderr,
