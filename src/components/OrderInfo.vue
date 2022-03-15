@@ -42,52 +42,61 @@
           {{ $t('Категория') }}
         </div>
         <div class="d-flex">
-          {{ getCategoryByUrl(order.category).name }} -
-          {{ getCategoryByUrl(order.category).cost }} сум
+          название: {{ getCategoryByUrl(order.category).name }} <br>
+          стоимость: {{ getCategoryByUrl(order.category).cost }} <br>
         </div>
       </a-col>
 
-      <a-col :span="10" v-if="order.driver">
-        <a-row type="flex" justify="space-between">
-          <a-col class="d-flex-column">
-            <div class="title">
-              <a-icon type="user"/>
-              {{ $t('Пользователь') }}
-            </div>
+      <template v-if="order.driver">
+        <a-col class="d-flex-column">
+          <div class="title">
+            <a-icon type="user"/>
+            {{ $t('Пользователь') }}
+          </div>
 
-            {{ fullName }}
+          {{ this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name }}
 
-          </a-col>
+        </a-col>
 
-          <a-col class="d-flex-column">
-            <div class="title">
-              <a-icon type="phone"/>
-              {{ $t('Номер телефона') }}
-            </div>
-            {{ order.driver.username }}
-            <br/>
-            <div class="" v-if="order.driver.info_driver.phone_number_second != 'null'">
-              {{ order.driver.info_driver.phone_number_second }}
-            </div>
-          </a-col>
+        <a-col class="d-flex-column">
+          <div class="title">
+            <a-icon type="phone"/>
+            {{ $t('Номер телефона') }}
+          </div>
+          {{ order.driver.username }}
+          <br/>
+          <div class="" v-if="order.driver.info_driver.phone_number_second != 'null'">
+            {{ order.driver.info_driver.phone_number_second }}
+          </div>
+        </a-col>
 
 
-          <a-col class="d-flex-column">
-            <div class="title">
-              <a-icon type="car"/>
-              {{ $t('Машина') }}
-            </div>
+        <a-col class="d-flex-column">
+          <div class="title">
+            <a-icon type="car"/>
+            {{ $t('Машина') }}
+          </div>
 
-            <div class="d-flex">
-              <input type="color" v-model="color" style="width: 25px; margin-right: 5px;" disabled>
-              {{ order.driver.info_driver.car_color.name }} -
-              {{ order.driver.info_driver.car_name.name }}
-              {{ order.driver.info_driver.car_number }}
-            </div>
+          <div class="d-flex">
+            <input type="color" v-model="this.order.driver.info_driver.car_color.code"
+                   style="width: 25px; margin-right: 5px;" disabled>
+            {{ order.driver.info_driver.car_color.name }} <br>
+            {{ order.driver.info_driver.car_name.name }}
+            {{ order.driver.info_driver.car_number }}
+          </div>
 
-          </a-col>
-        </a-row>
-      </a-col>
+        </a-col>
+
+        <a-col class="d-flex-column">
+          <div class="title">
+            <a-icon type="phone"/>
+            {{ $t('Вернуть деньги') }}
+          </div>
+          <a-button @click="cashBack(order)">
+            вернуть
+          </a-button>
+        </a-col>
+      </template>
 
     </a-row>
 
@@ -103,12 +112,9 @@ const {
 } = createNamespacedHelpers('order')
 export default {
   name: "OrderInfo",
-  data() {
-    if (this.order.driver) {
-      return {
-        color: this.order.driver.info_driver.car_color.code,
-        fullName: this.order.driver.info_driver.last_name + ' ' + this.order.driver.info_driver.first_name + ' ' + this.order.driver.info_driver.second_name
-      }
+  props: {
+    order: {
+      type: Object
     }
   },
   computed: {
@@ -116,12 +122,11 @@ export default {
       getCategoryByUrl: 'getCategoryByUrl'
     })
   },
-  props: {
-    order: {
-      type: Object
+  methods: {
+    cashBack(order) {
+      console.log(order)
     }
-  },
-
+  }
 }
 </script>
 

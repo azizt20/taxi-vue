@@ -24,29 +24,37 @@
       </a-form-item>
 
       <a-form-item>
-        <label> {{ $t('Выберите регион') }}
-          <a-select style="text-align: center" class="select-region" v-model="region" @change="changeRegion"
-                    size="large"
-                    placeholder="Выберите регион">
-            <a-select-option style="text-align: center" v-for="region in getregions" :key="region.url"
-                             :value="region.url">
-              {{ region.region }}
-            </a-select-option>
-          </a-select>
-        </label>
-      </a-form-item>
-
-      <a-form-item>
         <label> {{ $t('Выберите локацию') }}
-          <a-select style="text-align: center" size="large" v-model="idLocation" class="select-region"
-                    :disabled="!getselectedlocation && !region"
-                    placeholder="Выберите регион">
-            <a-select-option style="text-align: center" v-for="location in getlocationByRegion(this.region)"
-                             :key="location.url"
-                             :value="location.url">
-              {{ location.location }}
-            </a-select-option>
-          </a-select>
+          <div class="certain-category-search-wrapper" style="width: 300px">
+            <a-auto-complete
+                id="location"
+                class="certain-category-search"
+                dropdown-class-name="certain-category-search-dropdown"
+                :dropdown-match-select-width="false"
+                :dropdown-style="{ width: 'auto' }"
+                size="large"
+                style="width: 100%"
+                placeholder="Выберите локацию"
+                option-label-prop="value"
+                v-model="location"
+
+            >
+              <template slot="dataSource">
+
+                <a-select-option  v-for="location in searchByLocation(location)"
+                                 :key="location.url"
+                                 :value="location.location">
+                  {{ location.location }}
+                </a-select-option>
+
+
+              </template>
+              <a-input>
+                <a-icon slot="suffix" type="search" class="certain-category-icon"/>
+              </a-input>
+            </a-auto-complete>
+
+          </div>
         </label>
       </a-form-item>
 
@@ -64,11 +72,11 @@
         </label>
       </a-form-item>
 
-      <a-button @submit.prevent="submitOrder" :disabled="!region || !idLocation || !clientName || !phoneNomber || !idCategory"
+      <a-button @submit.prevent="submitOrder"
+                :disabled="!idLocation || !phoneNomber || !idCategory"
                 size="large" type="primary" html-type="submit">
         {{ $t('Оформить заказ') }}
       </a-button>
-
     </a-form>
 
   </div>
@@ -94,17 +102,23 @@ export default {
       clientName: '',
       dateTime: '',
       phoneNomber: '',
-      region: '',
       idLocation: '',
+      location: '',
       idCategory: '',
 
     }
   },
   watch: {
     getselectedlocation: function () {
-      this.region = this.getselectedlocation.addr
       this.idLocation = this.getselectedlocation.url
+      this.location = this.getselectedlocation.location
     },
+    searchByLocation: function () {
+      this.idLocation = this.searchByLocation(this.location)[0].url
+    },
+    location: function () {
+      this.searchByLocation(this.location)
+    }
 
   },
 
@@ -123,6 +137,9 @@ export default {
       this.idLocation = ""
     },
     submitOrder() {
+      if (!this.clientName) {
+        this.clientName = 'Не указано'
+      }
       this.createOrder({
         full_name: this.clientName,
         phone_number: "+998" + this.phoneNomber,
@@ -154,7 +171,7 @@ export default {
   computed: {
     ...mapMapGetters({
       getlocations: 'getlocations',
-      getregions: 'getregions',
+      searchByLocation: 'searchByLocation',
       getselectedlocation: 'getselectedlocation',
       getlocationByRegion: 'getlocationByRegion'
     }),

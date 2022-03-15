@@ -109,12 +109,6 @@ export default {
         region: this.getRegionByUrl(this.getlocationByUrl(orderr.address).addr)
       }
     },
-    onSearch(searchText) {
-      this.dataSource = this.getSearchUsers(searchText);
-    },
-    onSelect(value) {
-      this.dataSource = this.getSearchUsers(value);
-    },
     onChange(value) {
       this.dataSource = this.getSearchUsers(value);
     },

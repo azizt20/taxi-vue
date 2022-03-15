@@ -12,16 +12,16 @@ export default {
     namespaced: true,
     state: {
         websocekt: '',
-        allOrders: '',
-        allUsers: '',
+        allOrders: [],
+        allUsers: [],
         category: '',
-        cars: '',
-        color: '',
+        cars: [],
+        color: [],
     },
 
     getters: {
         getAllOrders: state => {
-            return state.allOrders;
+            return state.allOrders.reverse();
         },
         getAllCategory: state => {
             return state.category;
@@ -36,10 +36,10 @@ export default {
             return state.allOrders.filter(order => order.status === status);
         },
         getOrdersByDriver: state => (receiver) => {
-            return state.allOrders.filter(order => order && order.receiver === receiver);
+            return state.allOrders.filter(order => order && order.receiver === receiver) || false;
         },
         getAllUsers: state => {
-            return state.allUsers
+            return state.allUsers.reverse()
         },
         getSearchUsersByUsername: state => (searchText) => {
             return state.allUsers.filter(order => order.username.includes(searchText));
@@ -99,6 +99,12 @@ export default {
                             user_id: ''
                         })
                         resolve()
+                    })
+                    .catch(error => {
+                       if (error.phone_number){
+                           alert("Заказ не оформлен\n" +
+                               "Введите правельный номер телефона")
+                       }
                     })
             })
         },

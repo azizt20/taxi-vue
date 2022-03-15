@@ -73,7 +73,7 @@
         <div class="info">Номер машины : <b> {{ carNumber }}</b></div>
 
         <a href='https://api.azizt20.uz/admin/taxi_api/driver/' target="_blank">Изменить через админ панель</a>
-          <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
+        <div class="info"> Баланс пользователя : <b>{{ balance }} сум</b></div>
 
         <h1 style="margin-top: 50px">Пополнить баланс пользователя</h1>
 
@@ -107,10 +107,6 @@
             <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="first_name"/>
           </label>
 
-          <label class="d-flex"> Отчество
-            <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="second_name"/>
-          </label>
-
 
           <label class="d-flex"> Номер телефона
             <a-input size="large" :class="{'for-edit' : acces}" :disabled="!acces" v-model="firstNumber"/>
@@ -129,13 +125,14 @@
       </div>
 
     </div>
+    <template v-if="user">
 
-
-    <!--    <div v-if="OrdersByDriver(user.url)">-->
-    <!--      <div v-for="order in OrdersByDriver(user.url)" :key="order.url">-->
-    <!--        <OrderInfo :order="orderr(order)"/>-->
-    <!--      </div>-->
-    <!--    </div>-->
+      <template v-if="OrdersByDriver(user.url)">
+        <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
+          <OrderInfo :order="orderr(order)"/>
+        </div>
+      </template>
+    </template>
 
 
   </div>
@@ -145,7 +142,7 @@
 
 
 import {createNamespacedHelpers} from "vuex";
-// import OrderInfo from "./OrderInfo";
+import OrderInfo from "./OrderInfo";
 
 const {
   mapActions: mapOrderActions,
@@ -159,7 +156,7 @@ const {
 export default {
   name: "DriverForm",
   components: {
-    // OrderInfo
+    OrderInfo
   },
   data() {
     return {
@@ -170,7 +167,6 @@ export default {
       firstNumber: '',
       secondNumber: '',
       first_name: '',
-      second_name: '',
       las_name: '',
       date: '',
       balance: '',
@@ -199,7 +195,7 @@ export default {
       this.dataSource = this.searchByUsername(this.phone)
       if (this.dataSource.length === 1 && this.dataSource[0].username === this.phone) {
         this.carNumber = this.dataSource[0].info_driver.car_number
-        if (!this.dataSource[0].info_driver.car_number){
+        if (!this.dataSource[0].info_driver.car_number) {
           this.carNumber = ''
         }
         this.user = this.dataSource[0]
@@ -214,21 +210,23 @@ export default {
       }
     },
     user: function () {
-      this.first_name = this.user.info_driver.first_name
-      this.second_name = this.user.info_driver.second_name
-      this.las_name = this.user.info_driver.last_name
-      this.date = this.user.date_joined.split('T')[0] + " " + this.user.date_joined.split('T')[1].split('.')[0]
-      this.balance = this.user.info_driver.balance
-      this.color = {
-        name: this.user.info_driver.car_color.name,
-        code: this.user.info_driver.car_color.code
+      if (this.user) {
+        this.first_name = this.user.info_driver.first_name
+        this.las_name = this.user.info_driver.last_name
+        this.date = this.user.date_joined.split('T')[0] + " " + this.user.date_joined.split('T')[1].split('.')[0]
+        this.balance = this.user.info_driver.balance
+        this.color = {
+          name: this.user.info_driver.car_color.name,
+          code: this.user.info_driver.car_color.code
+        }
+        this.car = this.user.info_driver.car_name.name
+        this.secondNumber = this.user.info_driver.phone_number_second
+        this.firstNumber = this.user.info_driver.phone_number
       }
-      this.car = this.user.info_driver.car_name.name
-      this.secondNumber = this.user.info_driver.phone_number_second
-      this.firstNumber = this.user.info_driver.phone_number
     }
   },
   mounted() {
+    this.getOrders()
     this.getUsers()
     document.querySelector('#driverNumber input').setAttribute('type', 'number')
   },
@@ -237,6 +235,7 @@ export default {
       getUsers: 'getUsers',
       Balance: 'patchBalance',
       editInfo: 'patchDriverInfo',
+      getOrders: 'getOrders',
     }),
     submitBalance() {
       this.Balance({
@@ -251,18 +250,18 @@ export default {
       this.editInfo({
         id: this.user.info_driver.id,
         first_name: this.first_name,
-        second_name: this.second_name,
         las_name: this.las_name,
         phone_number: this.firstNumber,
         phone_number_second: this.secondNumber,
       })
+      this.acces = false
     }
 
     ,
     orderr(orderr) {
       return {
         ...orderr,
-        driver: this.UserByUrl(orderr.receiver),
+        driver: this.user,
         address: this.locationByUrl(orderr.address),
         region: this.RegionByUrl(this.locationByUrl(orderr.address).addr)
       }

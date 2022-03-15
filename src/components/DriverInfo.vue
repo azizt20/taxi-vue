@@ -67,7 +67,7 @@ export default {
       color: this.driver.info_driver.car_color.code,
       date: this.driver.date_joined.split('T')[0],
       time: this.driver.date_joined.split('T')[1].split('.')[0],
-      fullName: this.driver.info_driver.last_name + ' ' + this.driver.info_driver.first_name + ' ' + this.driver.info_driver.second_name
+      fullName: this.driver.info_driver.last_name + ' ' + this.driver.info_driver.first_name
     }
   },
   props: {

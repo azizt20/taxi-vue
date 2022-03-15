@@ -3,21 +3,10 @@
     <a-form @submit.prevent="submitEdit" class="form">
 
       <a-form-item>
-        <label> {{$t('Выберите регион')}}
-          <a-select class="select-region" v-model="region" @change="changeRegion" size="large"
-                    placeholder="Выберите регион">
-            <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
-              {{ region.region }}
-            </a-select-option>
-          </a-select>
-        </label>
-      </a-form-item>
-
-      <a-form-item>
         <label> {{$t('Выберите локацию')}}
-          <a-select size="large" v-model="idLocation" @change="changeLocation" class="select-region" :disabled="!getselectedlocation && !region"
+          <a-select size="large" v-model="idLocation" @change="changeLocation" class="select-region"
                     placeholder="Выберите регион">
-            <a-select-option v-for="location in getlocationByRegion(this.region)" :key="location.url"
+            <a-select-option v-for="location in getlocations" :key="location.url"
                              :value="location.url">
               {{ location.location }}
             </a-select-option>
@@ -27,21 +16,11 @@
 
       <hr/>
 
-      <a-form-item>
-        <label> {{$t('Выберите регион')}}
-          <a-select class="select-region" v-model="newRegion" size="large"
-                    placeholder="Выберите регион">
-            <a-select-option v-for="region in getregions" :key="region.url" :value="region.url">
-              {{ region.region }}
-            </a-select-option>
-          </a-select>
-        </label>
-      </a-form-item>
 
 
       <a-form-item>
         <label>{{$t('Редактировать название локации')}}
-          <a-input v-model="newLocation" size="large"/>
+          <a-input v-model="newLocation"  :disabled="!getselectedlocation && !idLocation" size="large"/>
         </label>
       </a-form-item>
 
@@ -59,7 +38,7 @@
       </a-form-item>
 
 
-      <a-button @submit.prevent="submitEdit" :disabled="!idLocation || !newRegion" size="large" type="primary" html-type="submit">
+      <a-button @submit.prevent="submitEdit" :disabled="!idLocation" size="large" type="primary" html-type="submit">
         {{$t('Сохранить изменения')}}
       </a-button>
 
@@ -145,9 +124,7 @@ export default {
   computed: {
     ...mapMapGetters({
       getlocations: 'getlocations',
-      getregions: 'getregions',
       getselectedlocation: 'getselectedlocation',
-      getlocationByRegion: 'getlocationByRegion',
       getNewCoords: 'getNewCoords',
       getlocationByUrl: 'getlocationByUrl'
     }),

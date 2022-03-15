@@ -51,11 +51,17 @@ export default {
     }
 
   },
+  watch:{
+    newCoords: function (){
+      console.log(this.newCoords)
+    }
+  },
 
   methods: {
     onClick(e) {
       this.newCoords = e.get('coords');
       this.setCoord(this.newCoords)
+      console.log(this.newCoords)
 
     },
 

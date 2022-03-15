@@ -19,6 +19,9 @@ export default {
         getlocations: state => {
             return state.locations;
         },
+        searchByLocation: state => (searchText) => {
+            return state.locations.filter(location => location.location.includes(searchText)) || state.locations;
+        },
         getregions: state => {
             return state.regions;
         },
@@ -36,6 +39,9 @@ export default {
         },
         getRegionByUrl: (state) => (url) => {
             return state.regions.find(region => region.url === url);
+        },
+        getRegionByName: (state) => (url) => {
+            return state.locations.find(region => region.url === url);
         }
     },
 
@@ -112,6 +118,7 @@ export default {
                         resolve()
                     })
             })
+
         },
 
         async editLocation({dispatch}, newLocation) {
