@@ -98,7 +98,6 @@ export default {
       this.newRegion = this.region
     },
     changeLocation() {
-      alert('as')
       this.newLocation = this.getlocationByUrl(this.idLocation).location
       this.newRegion = this.getlocationByUrl(this.idLocation).addr
       this.url = this.getlocationByUrl(this.idLocation).url
