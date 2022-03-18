@@ -150,7 +150,7 @@ export default {
       this.clientName = ""
       this.orderId = Date.now()
       this.phoneNomber = ""
-      this.region = ""
+      this.location = ""
       this.idLocation = ""
       this.idCategory = ""
 
