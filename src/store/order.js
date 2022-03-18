@@ -42,10 +42,10 @@ export default {
             return state.allUsers.reverse()
         },
         getSearchUsersByUsername: state => (searchText) => {
-            return state.allUsers.filter(order => order.username.includes(searchText));
+            return state.allUsers.filter(order => order.username.toUpperCase().includes(searchText.toUpperCase()));
         },
         getSearchUsersByCarNumber: state => (number) => {
-            return state.allUsers.filter(order => order.info_driver.car_number && order.info_driver.car_number.includes(number));
+            return state.allUsers.filter(order => order.info_driver.car_number && order.info_driver.car_number.toUpperCase()    .includes(number.toUpperCase()));
         },
         getUserById: state => (id) => {
             return state.allUsers.find(user => user.pk === id);
@@ -154,7 +154,7 @@ export default {
             })
         },
 
-        webSocket({state}) {
+        webSocket({state, dispatch }) {
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
@@ -165,6 +165,14 @@ export default {
                 console.log(e)
                 console.log(state.websocekt);
 
+            }
+            state.websocekt.onclose = (e) => {
+                console.log(e)
+                dispatch('webSocket')
+            }
+            state.websocekt.onerror = (e) => {
+                console.log(e)
+                dispatch('webSocket')
             }
         },
 

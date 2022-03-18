@@ -20,7 +20,7 @@ export default {
             return state.locations;
         },
         searchByLocation: state => (searchText) => {
-            return state.locations.filter(location => location.location.includes(searchText)) || state.locations;
+            return state.locations.filter(location => location.location.toUpperCase().includes(searchText.toUpperCase())) || state.locations;
         },
         getregions: state => {
             return state.regions;
@@ -33,6 +33,9 @@ export default {
         },
         getlocationByRegion: (state) => (region) => {
             return state.locations.filter(location => location.addr === region);
+        },
+        getlocationByName: (state) => (name) => {
+            return state.locations.find(location => location.location.toUpperCase() === name.toUpperCase());
         },
         getlocationByUrl: (state) => (url) => {
             return state.locations.find(location => location.url === url);

@@ -43,7 +43,8 @@
 
                 <a-select-option  v-for="location in searchByLocation(location)"
                                  :key="location.url"
-                                 :value="location.location">
+                                 :value="location.location"
+                @click="selectFromAll(location)">
                   {{ location.location }}
                 </a-select-option>
 
@@ -77,8 +78,8 @@
                 size="large" type="primary" html-type="submit">
         {{ $t('Оформить заказ') }}
       </a-button>
-    </a-form>
 
+    </a-form>
   </div>
 </template>
 
@@ -105,7 +106,6 @@ export default {
       idLocation: '',
       location: '',
       idCategory: '',
-
     }
   },
   watch: {
@@ -113,11 +113,13 @@ export default {
       this.idLocation = this.getselectedlocation.url
       this.location = this.getselectedlocation.location
     },
-    searchByLocation: function () {
-      this.idLocation = this.searchByLocation(this.location)[0].url
-    },
+
     location: function () {
+      this.idLocation = ''
       this.searchByLocation(this.location)
+      if (this.getlocationByName(this.location)){
+        this.idLocation = this.getlocationByName(this.location).url
+      }
     }
 
   },
@@ -133,6 +135,9 @@ export default {
       createOrder: 'createOrder',
       webSocket: 'webSocket'
     }),
+    selectFromAll(location){
+      this.idLocation = location.url
+    },
     changeRegion() {
       this.idLocation = ""
     },
@@ -173,7 +178,8 @@ export default {
       getlocations: 'getlocations',
       searchByLocation: 'searchByLocation',
       getselectedlocation: 'getselectedlocation',
-      getlocationByRegion: 'getlocationByRegion'
+      getlocationByRegion: 'getlocationByRegion',
+      getlocationByName: 'getlocationByName'
     }),
     ...mapOrderGetters({
       getAllCategory: 'getAllCategory'
@@ -189,6 +195,7 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
+  overflow-y: scroll;
 
   .select-region {
     width: 100%;
