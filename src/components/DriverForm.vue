@@ -128,9 +128,7 @@
     <template v-if="user">
 
       <template v-if="OrdersByDriver(user.url)">
-        <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
-          <OrderInfo :order="orderr(order)" @cashBack="cashBack"/>
-        </div>
+          <OrderInfo :orders="OrdersByDriver(user.url)" @cashBack="cashBack"/>
       </template>
     </template>
 
@@ -265,15 +263,6 @@ export default {
       this.acces = false
     }
 
-    ,
-    orderr(orderr) {
-      return {
-        ...orderr,
-        driver: this.user,
-        address: this.locationByUrl(orderr.address),
-        region: this.RegionByUrl(this.locationByUrl(orderr.address).addr)
-      }
-    },
   },
 
 }

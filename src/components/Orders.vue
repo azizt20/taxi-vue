@@ -17,9 +17,7 @@
               {{ $t('Поиск водителя') }}
             </span>
               <h2>Список заказов в поисках водителя </h2>
-              <div v-for="order in getOrdersByStatus(waiting)" :key="order.url">
-                <OrderInfo :order="orderr(order)"/>
-              </div>
+                <OrderInfo :orders="getOrdersByStatus(waiting)"/>
             </a-tab-pane>
             <a-tab-pane key="2" style>
             <span slot="tab">
@@ -27,9 +25,7 @@
               {{ $t('В пути к клиенту') }}
             </span>
               <h2>Спаиок заказов которые ожидают водителя </h2>
-              <div v-for="order in getOrdersByStatus(inProgress)" :key="order.url">
-                <OrderInfo :order="orderr(order)"/>
-              </div>
+                <OrderInfo :orders="getOrdersByStatus(inProgress)"/>
             </a-tab-pane>
             <a-tab-pane key="3" style>
             <span slot="tab">
@@ -37,9 +33,7 @@
               {{ $t('У клиента') }}
             </span>
               <h2>Спаиок заказов которые которые ожидают клиента </h2>
-              <div v-for="order in getOrdersByStatus(ImHere)" :key="order.url">
-                <OrderInfo :order="orderr(order)"/>
-              </div>
+                <OrderInfo :orders="getOrdersByStatus(ImHere)"/>
             </a-tab-pane>
             <a-tab-pane key="4">
                     <span slot="tab">
@@ -47,10 +41,7 @@
               {{ $t('В пути') }}
             </span>
               <h2>Спаиок заказов которые в пути </h2>
-              <div v-for="order in this.getOrdersByStatus(go)" :key="order.url">
-                <OrderInfo :order="orderr(order)"/>
-                <br/>
-              </div>
+                <OrderInfo :orders="getOrdersByStatus(go)"/>
             </a-tab-pane>
             <a-tab-pane key="5">
                     <span slot="tab">
@@ -58,9 +49,7 @@
               {{ $t('Законченный') }}
             </span>
               <h2>Спаиок заказов которые завершены </h2>
-              <div v-for="order in this.getOrdersByStatus(done)" :key="order.url">
-                <OrderInfo :order="orderr(order)"/>
-              </div>
+                <OrderInfo :orders="getOrdersByStatus(done)"/>
             </a-tab-pane>
           </a-tabs>
 
@@ -92,7 +81,6 @@ const {
 } = createNamespacedHelpers('map')
 
 const {
-  mapActions: mapOrderActions,
   mapGetters: mapOrderGetters,
 } = createNamespacedHelpers('order')
 
@@ -114,32 +102,13 @@ export default {
       done: "done",
     }
   },
-  mounted() {
-    this.getOrders()
-    this.getUsers()
-  },
   methods: {
-    ...mapOrderActions({
-      getOrders: 'getOrders',
-      getUsers: 'getUsers',
-    }),
-    orderr(orderr) {
-      return {
-        ...orderr,
-        driver: this.getUserByUrl(orderr.receiver),
-        address: this.getlocationByUrl(orderr.address),
-        region: this.getRegionByUrl(this.getlocationByUrl(orderr.address).addr)
-      }
-    },
-    onChange(value) {
-      this.dataSource = this.getSearchUsers(value);
-    },
+
   },
   computed: {
     ...mapOrderGetters({
       getAllOrders: 'getAllOrders',
       getAllUsers: 'getAllUsers',
-      getSearchUsers: 'getSearchUsers',
       getOrdersByStatus: 'getOrdersByStatus',
       getUserByUrl: 'getUserByUrl',
       getUserById: 'getUserById',
