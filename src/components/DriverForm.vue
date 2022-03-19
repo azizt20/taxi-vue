@@ -129,7 +129,7 @@
 
       <template v-if="OrdersByDriver(user.url)">
         <div v-for="order in OrdersByDriver(user.url)" :key="order.url">
-          <OrderInfo :order="orderr(order)"/>
+          <OrderInfo :order="orderr(order)" @cashBack="cashBack"/>
         </div>
       </template>
     </template>
@@ -245,6 +245,14 @@ export default {
           this.balance = parseInt(this.balance) + parseInt(this.cash)
       )
       this.cash = ''
+    },
+    cashBack(money){
+      this.Balance({
+        id: this.user.info_driver.id,
+        balance: parseInt(this.balance) + parseInt(money)
+      }).then(
+          this.balance = parseInt(this.balance) + parseInt(money)
+      )
     },
     submitEdit() {
       this.editInfo({

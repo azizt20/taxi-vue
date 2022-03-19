@@ -14,30 +14,50 @@
             <a-tab-pane key="1" style>
             <span slot="tab">
               <a-icon type="sync" spin/>
-              {{ $t('В Ожидании') }}
+              {{ $t('Поиск водителя') }}
             </span>
-              <h2>Спаиок заказов которые "В ожидании" </h2>
+              <h2>Список заказов в поисках водителя </h2>
               <div v-for="order in getOrdersByStatus(waiting)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
               </div>
             </a-tab-pane>
-            <a-tab-pane key="2">
+            <a-tab-pane key="2" style>
+            <span slot="tab">
+              <a-icon type="sync" spin/>
+              {{ $t('В пути к клиенту') }}
+            </span>
+              <h2>Спаиок заказов которые ожидают водителя </h2>
+              <div v-for="order in getOrdersByStatus(inProgress)" :key="order.url">
+                <OrderInfo :order="orderr(order)"/>
+              </div>
+            </a-tab-pane>
+            <a-tab-pane key="3" style>
+            <span slot="tab">
+              <a-icon type="sync" spin/>
+              {{ $t('У клиента') }}
+            </span>
+              <h2>Спаиок заказов которые которые ожидают клиента </h2>
+              <div v-for="order in getOrdersByStatus(ImHere)" :key="order.url">
+                <OrderInfo :order="orderr(order)"/>
+              </div>
+            </a-tab-pane>
+            <a-tab-pane key="4">
                     <span slot="tab">
               <a-icon type="dingding"/>
               {{ $t('В пути') }}
             </span>
-              <h2>Спаиок заказов которые "В процессе" </h2>
-              <div v-for="order in this.getOrdersByStatus(inProgress)" :key="order.url">
+              <h2>Спаиок заказов которые в пути </h2>
+              <div v-for="order in this.getOrdersByStatus(go)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
                 <br/>
               </div>
             </a-tab-pane>
-            <a-tab-pane key="3">
+            <a-tab-pane key="5">
                     <span slot="tab">
               <a-icon type="check-circle"/>
               {{ $t('Законченный') }}
             </span>
-              <h2>Спаиок заказов которые "Завершены" </h2>
+              <h2>Спаиок заказов которые завершены </h2>
               <div v-for="order in this.getOrdersByStatus(done)" :key="order.url">
                 <OrderInfo :order="orderr(order)"/>
               </div>
@@ -89,6 +109,8 @@ export default {
     return {
       waiting: "waiting",
       inProgress: "inProgress",
+      go: "go",
+      ImHere: "ImHere",
       done: "done",
     }
   },

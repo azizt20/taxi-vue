@@ -125,7 +125,6 @@ export default {
   },
 
   created() {
-    this.webSocket()
     setInterval(this.getDateTime, 1000)
   },
 
@@ -133,7 +132,6 @@ export default {
 
     ...mapOrderActions({
       createOrder: 'createOrder',
-      webSocket: 'webSocket'
     }),
     selectFromAll(location){
       this.idLocation = location.url

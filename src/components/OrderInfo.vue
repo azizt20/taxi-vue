@@ -10,7 +10,6 @@
           {{ $t('Время') }}
         </div>
         {{ order.created_at.split('T')[0] }} <br> {{ order.created_at.split('T')[1].split('.')[0] }}
-
       </a-col>
 
       <a-col class="d-flex-column">
@@ -46,6 +45,8 @@
           стоимость: {{ getCategoryByUrl(order.category).cost }} <br>
         </div>
       </a-col>
+
+
 
       <template v-if="order.driver">
         <a-col class="d-flex-column">
@@ -87,12 +88,12 @@
 
         </a-col>
 
-        <a-col class="d-flex-column">
+        <a-col  v-if="$route.name === 'driver'" class="d-flex-column">
           <div class="title">
             <a-icon type="phone"/>
             {{ $t('Вернуть деньги') }}
           </div>
-          <a-button @click="cashBack(order)">
+          <a-button @click="$emit('cashBack', getCategoryByUrl(order.category).percent)">
             вернуть
           </a-button>
         </a-col>
@@ -123,9 +124,7 @@ export default {
     })
   },
   methods: {
-    cashBack(order) {
-      console.log(order)
-    }
+
   }
 }
 </script>

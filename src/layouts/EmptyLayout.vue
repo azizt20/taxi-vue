@@ -1,7 +1,7 @@
 <template>
-<div class="EmptyLayout">
-  <router-view/>
-</div>
+  <div class="EmptyLayout">
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -14,27 +14,43 @@ const {
 const {
   mapActions: mapOrderActions,
 } = createNamespacedHelpers('order')
+
+
+
 export default {
   name: "EmptyLayout",
   mounted() {
     this.getAllLocations()
     this.getCategory()
     this.getCars()
+    this.webSocket()
+    window.addEventListener('online', this.updateOnlineStatus);
+    window.addEventListener('offline', this.updateOnlineStatus);
+
   },
-  methods:{
+  methods: {
     ...mapMapActions({
       getAllLocations: 'getAllLocations',
     }),
     ...mapOrderActions({
       getCategory: 'getCategory',
       getCars: 'getCars',
-    })
+      webSocket: 'webSocket',
+    }),
+    updateOnlineStatus() {
+      if (navigator.onLine) {
+        this.webSocket()
+      }
+      else alert('Соединение потеряно - отсутсвие интернета')
+    },
+
+
   }
 }
 </script>
 
 <style scoped>
-.EmptyLayout{
+.EmptyLayout {
   width: 100%;
   height: 100%;
 }

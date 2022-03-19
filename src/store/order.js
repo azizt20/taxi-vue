@@ -153,12 +153,12 @@ export default {
                     })
             })
         },
-
         webSocket({state, dispatch }) {
             state.websocekt = new WebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
                 console.log(state.websocekt);
+
 
             };
             state.websocekt.onmessage = (e) => {
@@ -168,11 +168,15 @@ export default {
             }
             state.websocekt.onclose = (e) => {
                 console.log(e)
-                dispatch('webSocket')
+                if (navigator.onLine){
+                    dispatch('webSocket')
+                }
             }
             state.websocekt.onerror = (e) => {
                 console.log(e)
-                dispatch('webSocket')
+                if (navigator.onLine){
+                    dispatch('webSocket')
+                }
             }
         },
 
