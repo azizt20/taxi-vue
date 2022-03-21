@@ -69,6 +69,16 @@ const routes = [
         }
     },
     {
+        path: '/politics',
+        name: 'politics',
+        component: () => import('./views/Politika'),
+        meta: {
+            title: 'Политика конфиденциальности',
+            layout: 'empty',
+            requiredAuth: false,
+        }
+    },
+    {
         path: '/create',
         name: 'order',
         component: CreateOrder,
