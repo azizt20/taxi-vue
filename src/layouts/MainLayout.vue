@@ -13,7 +13,6 @@ export default {
 
 <style scoped>
 .MainLayout{
-  background: antiquewhite;
   width: 100%;
   height: 100%;
 }

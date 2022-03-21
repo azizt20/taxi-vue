@@ -74,7 +74,7 @@ const routes = [
         component: () => import('./views/Politika'),
         meta: {
             title: 'Политика конфиденциальности',
-            layout: 'empty',
+            layout: 'main',
             requiredAuth: false,
         }
     },
