@@ -69,7 +69,7 @@ const routes = [
         }
     },
     {
-        path: '/politics',
+        path: '/privacy_policy',
         name: 'politics',
         component: () => import('./views/Politika'),
         meta: {
