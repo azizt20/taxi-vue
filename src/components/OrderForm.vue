@@ -193,7 +193,6 @@ export default {
   height: 100%;
   display: flex;
   align-items: center;
-  overflow-y: scroll;
 
   .select-region {
     width: 100%;
