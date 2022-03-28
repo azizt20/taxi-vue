@@ -29,8 +29,12 @@
                        style="background: #FFFFFF"/>
             </label>
           </div>
+          <label>Ожидание
+            <a-input size="large" type="number" v-model="wait" placeholder="Введите ожидание"
+                     style="background: #FFFFFF"/>
+          </label>
 
-          <a-button @submit.prevent="createCategory" :disabled="!name || !cars || !cost || !percent" size="large" type="primary"
+          <a-button @submit.prevent="createCategory" :disabled="!name || !cars || !cost || !percent || !wait" size="large" type="primary"
                     html-type="submit">{{ $t('создать') }}
           </a-button>
         </a-form>
@@ -75,10 +79,12 @@
               <a-input size="large" type="number" v-model="editPercent" placeholder="Введите процент"
                        style="background: #FFFFFF"/>
             </label>
-
-
           </div>
-          <a-button @submit.prevent="editCategory" :disabled="!editName || !categotyCars || !chooseCategory || !editCost || ! editPercent"
+          <label>Ожидание
+            <a-input size="large" type="number" v-model="editWait" placeholder="Введите ожидание"
+                     style="background: #FFFFFF"/>
+          </label>
+          <a-button @submit.prevent="editCategory" :disabled="!editName || !categotyCars || !chooseCategory || !editCost || !editPercent || !editWait"
                     size="large"
                     type="primary" html-type="submit">{{ $t('обновить') }}
           </a-button>
@@ -153,10 +159,12 @@ export default {
       name: '',
       cost: '',
       percent: '',
+      wait: '',
       chooseCategory: '',
       editName: '',
       editCost: '',
       editPercent: '',
+      editWait: '',
       categotyCars: [],
       newCar: '',
       colorCode: '#000000',
@@ -169,6 +177,7 @@ export default {
       this.editName = this.getCategoryByUrl(this.chooseCategory).name
       this.editCost = this.getCategoryByUrl(this.chooseCategory).cost
       this.editPercent = this.getCategoryByUrl(this.chooseCategory).percent
+      this.editWait = this.getCategoryByUrl(this.chooseCategory).wait
     }
   },
   mounted() {
@@ -188,12 +197,14 @@ export default {
         name: this.name,
         car: this.cars,
         percent: this.percent,
-        cost: this.cost
+        cost: this.cost,
+        wait: this.wait
       });
       this.name = ""
       this.cars = []
       this.percent = ""
       this.cost = ""
+      this.wait = ""
     },
     editCategory() {
       this.putCategory({
@@ -202,12 +213,14 @@ export default {
         car: this.categotyCars,
         percent: this.editPercent,
         cost: this.editCost,
+        wait: this.editWait,
       })
       this.editName = ""
       this.categotyCars = []
       this.chooseCategory = ""
       this.editPercent = ""
       this.editCost = ""
+      this.editWait = ""
     },
     createCar() {
       this.postCar({
