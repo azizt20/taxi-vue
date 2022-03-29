@@ -1,4 +1,6 @@
 import apiRequest from "../utils/apiRequest";
+import ReconnectingWebSocket from 'reconnecting-websocket';
+
 
 const WS_URL = process.env.VUE_APP_WS_URL;
 
@@ -45,7 +47,7 @@ export default {
             return state.allUsers.filter(order => order.username.toUpperCase().includes(searchText.toUpperCase()));
         },
         getSearchUsersByCarNumber: state => (number) => {
-            return state.allUsers.filter(order => order.info_driver.car_number && order.info_driver.car_number.toUpperCase()    .includes(number.toUpperCase()));
+            return state.allUsers.filter(order => order.info_driver.car_number && order.info_driver.car_number.toUpperCase().includes(number.toUpperCase()));
         },
         getUserById: state => (id) => {
             return state.allUsers.find(user => user.pk === id);
@@ -101,10 +103,10 @@ export default {
                         resolve()
                     })
                     .catch(error => {
-                       if (error.phone_number){
-                           alert("Заказ не оформлен\n" +
-                               "Введите правельный номер телефона")
-                       }
+                        if (error.phone_number) {
+                            alert("Заказ не оформлен\n" +
+                                "Введите правельный номер телефона")
+                        }
                     })
             })
         },
@@ -153,30 +155,23 @@ export default {
                     })
             })
         },
-        webSocket({state, dispatch }) {
-            state.websocekt = new WebSocket(`${WS_URL}`);
+        webSocket({state}) {
+            if (state.websocekt){
+                state.close()
+            }
+            state.websocekt = new ReconnectingWebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
-                console.log(state.websocekt);
-
-
             };
             state.websocekt.onmessage = (e) => {
                 console.log(e)
-                console.log(state.websocekt);
 
             }
             state.websocekt.onclose = (e) => {
                 console.log(e)
-                if (navigator.onLine){
-                    dispatch('webSocket')
-                }
             }
             state.websocekt.onerror = (e) => {
                 console.log(e)
-                if (navigator.onLine){
-                    dispatch('webSocket')
-                }
             }
         },
 
