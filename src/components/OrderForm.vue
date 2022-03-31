@@ -74,7 +74,7 @@
       </a-form-item>
 
       <a-button @submit.prevent="submitOrder"
-                :disabled="!idLocation || !phoneNomber || !idCategory || window.navigator.onLine" 
+                :disabled="!idLocation || !phoneNomber || !idCategory" 
                 size="large" type="primary" html-type="submit">
         {{ $t('Оформить заказ') }}
       </a-button>
