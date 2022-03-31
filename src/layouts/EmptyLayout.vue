@@ -24,7 +24,7 @@ export default {
     this.getCategory()
     this.getCars()
     this.webSocket()
-
+    window.addEventListener('online', this.updateOnlineStatus);
     window.addEventListener('offline', this.updateOnlineStatus);
 
   },
@@ -39,7 +39,7 @@ export default {
     }),
     updateOnlineStatus() {
       if (navigator.onLine) {
-        this.webSocket()
+        alert('Соединение восстановлено - интернета подключен')
       }
       else alert('Соединение потеряно - отсутсвие интернета')
     },
