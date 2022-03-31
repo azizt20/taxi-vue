@@ -24,7 +24,7 @@ export default {
     this.getCategory()
     this.getCars()
     this.webSocket()
-    window.addEventListener('online', this.updateOnlineStatus);
+
     window.addEventListener('offline', this.updateOnlineStatus);
 
   },
