@@ -103,10 +103,8 @@ export default {
                         resolve()
                     })
                     .catch(error => {
-                        if (error.phone_number) {
                             alert("Заказ не оформлен\n" +
-                                "Введите правельный номер телефона")
-                        }
+                                error)
                     })
             })
         },
