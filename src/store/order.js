@@ -156,9 +156,6 @@ export default {
             })
         },
         webSocket({state}) {
-            if (state.websocekt){
-                state.close()
-            }
             state.websocekt = new ReconnectingWebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
