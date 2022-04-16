@@ -39,7 +39,7 @@ export default {
     }),
     updateOnlineStatus() {
       if (navigator.onLine) {
-        this.webSocket()
+        alert('Соединение восстановлено - интернета подключен')
       }
       else alert('Соединение потеряно - отсутсвие интернета')
     },

@@ -104,10 +104,8 @@ export default {
                         resolve()
                     })
                     .catch(error => {
-                        if (error.phone_number) {
                             alert("Заказ не оформлен\n" +
-                                "Введите правельный номер телефона")
-                        }
+                                error)
                     })
             })
         },
@@ -157,9 +155,6 @@ export default {
             })
         },
         webSocket({state}) {
-            if (state.websocekt){
-                state.close()
-            }
             state.websocekt = new ReconnectingWebSocket(`${WS_URL}`);
             state.websocekt.onopen = (e) => {
                 console.log(e)
