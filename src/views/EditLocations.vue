@@ -13,10 +13,11 @@
           <Map/>
         </a-layout-content>
       </a-layout>
-      <a-layout-footer class="footer">
-        <Footer/>
-      </a-layout-footer>
     </a-layout>
+
+    <div class="res">
+      <EditForm />
+    </div>
 
   </div>
 </template>
@@ -25,7 +26,6 @@
 import Map from "../components/Map";
 import Header from "../components/Header";
 import EditForm from "../components/EditForm";
-import Footer from "../components/Footer";
 
 export default {
   name: "EditLocations",
@@ -33,7 +33,6 @@ export default {
     Map,
     Header,
     EditForm,
-    Footer
   },
 
 
@@ -49,7 +48,9 @@ export default {
 .header, .slider, .footer, .content {
   background: transparent;
 }
-
+.header{
+  padding: 0;
+}
 .slider {
   flex: 0 0 400 !important;
   max-width: 400px !important;

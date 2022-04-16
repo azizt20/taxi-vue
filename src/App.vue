@@ -1,9 +1,9 @@
 <template>
-<div id="app">
-  <component :is="layout">
-    <router-view/>
-  </component>
-</div>
+  <div id="app">
+    <component :is="layout">
+      <router-view/>
+    </component>
+  </div>
 </template>
 
 <script>
@@ -24,12 +24,59 @@ export default {
 </script>
 
 <style lang="scss">
-.h-100{
+
+.res{
+  display: flex !important;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+}
+.no-res {
+display: none !important;
+}
+@media (min-width: 576px) {
+  .d-sm-none {
+    display: none;
+  }
+  .d-sm-flex {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .d-md-none {
+    display: none ;
+  }
+  .d-md-flex {
+    display: flex;
+  }
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none ;
+  }
+  .d-lg-flex {
+    display: flex;
+  }
+
+  .res{
+    display: none !important;
+  }
+  .no-res{
+    display: flex !important;
+  }
+}
+
+.h-100 {
   height: 100%;
 }
-.w-100{
+
+.w-100 {
   width: 100%;
 }
+
 #app {
   width: 100%;
   height: 100%;
@@ -40,7 +87,7 @@ export default {
   color: #2c3e50;
 }
 
-.ant-layout-content{
+.ant-layout-content {
   border: 1px solid rgba(70, 64, 64, 0.72);
 }
 
@@ -48,38 +95,53 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
 input[type='number'] {
   -moz-appearance: textfield;
 }
-.d-flex{
+
+.d-flex {
   display: flex;
 }
-.flex-column{
+
+.d-none {
+  display: none !important;
+}
+
+.flex-column {
   display: flex;
   flex-direction: column;
 }
-.j-c-s{
+
+.j-c-s {
   justify-content: start;
 }
-.j-c-c{
+
+.j-c-c {
   justify-content: center;
 }
-.j-c-e{
+
+.j-c-e {
   justify-content: end;
 }
-.j-c-b{
+
+.j-c-b {
   justify-content: space-between;
 }
-.j-c-a{
+
+.j-c-a {
   justify-content: space-around;
 }
-.a-i-s{
+
+.a-i-s {
   align-items: start;
 }
-.a-i-c{
+
+.a-i-c {
   align-items: start;
 }
-.a-i-e{
+
+.a-i-e {
   align-items: end;
 }
 

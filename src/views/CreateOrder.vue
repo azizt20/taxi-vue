@@ -1,7 +1,7 @@
 <template>
   <div class="CreateOrder">
 
-    <a-layout class="h-100 w-100">
+    <a-layout class="h-100 w-100 no-res">
       <a-layout-header class="header">
         <Header/>
       </a-layout-header>
@@ -13,10 +13,18 @@
           <Map/>
         </a-layout-content>
       </a-layout>
-      <a-layout-footer class="footer">
-        <Footer/>
-      </a-layout-footer>
+
     </a-layout>
+
+
+    <a-layout class="h-100">
+      <br>
+      <Header/>
+      <div class="res">
+        <OrderForm/>
+      </div>
+    </a-layout>
+
 
   </div>
 </template>
@@ -25,7 +33,6 @@
 import Map from "../components/Map";
 import Header from "../components/Header";
 import OrderForm from "../components/OrderForm";
-import Footer from "../components/Footer";
 
 export default {
   name: "Order",
@@ -33,7 +40,6 @@ export default {
     Map,
     Header,
     OrderForm,
-    Footer
   },
 }
 </script>
@@ -46,8 +52,12 @@ export default {
 
 }
 
-.header, .slider, .footer, .content{
+.header, .slider, .content{
   background: transparent;
+}
+
+.header{
+  padding: 0;
 }
 
 </style>

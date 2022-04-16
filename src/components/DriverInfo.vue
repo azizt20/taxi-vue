@@ -1,21 +1,19 @@
 <template>
   <div class="DriverInfo">
 
-    <a-row type="flex" class="w-100" justify="space-around">
+    <div type="flex" class="w-100 row d-flex j-c-a">
 
-      <a-col class="d-flex-column">
+      <div class="d-flex-column col">
         <div class="title">
-          <a-icon type="user"/>
           {{ $t('Пользователь') }}
         </div>
 
         {{ fullName }}
 
-      </a-col>
+      </div>
 
-      <a-col class="d-flex-column">
+      <div class="d-flex-column col">
         <div class="title">
-          <a-icon type="phone"/>
           {{ $t('Номер телефона') }}
         </div>
         {{ driver.username }}
@@ -23,12 +21,11 @@
         <div class="" v-if="driver.info_driver.phone_number_second != 'null'">
           {{ driver.info_driver.phone_number_second }}
         </div>
-      </a-col>
+      </div>
 
 
-      <a-col class="d-flex-column">
+      <div class="d-flex-column col">
         <div class="title">
-          <a-icon type="car"/>
           {{ $t('Машина') }}
         </div>
         <div class="d-flex">
@@ -36,25 +33,23 @@
           {{ driver.info_driver.car_color.name }} -
           {{ driver.info_driver.car_name.name }}
         </div>
-      </a-col>
+      </div>
 
-      <a-col class="d-flex-column">
+      <div class="d-flex-column col">
         <div class="title">
-          <a-icon type="number"/>
           {{ $t('Номер авто') }}
         </div>
         {{ driver.info_driver.car_number }}
-      </a-col>
+      </div>
 
 
-      <a-col class="d-flex-column">
+      <div class="d-flex-column col">
         <div class="title">
-          <a-icon type="calendar"/>
           {{ $t('Зарегистрирован') }}
         </div>
         {{ date }} - {{ time }}
-      </a-col>
-    </a-row>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -106,5 +101,7 @@ export default {
     }
   }
 }
+
+
 
 </style>

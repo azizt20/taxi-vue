@@ -1,37 +1,35 @@
 <template>
   <div class="OrderOnfo">
-    <a-row v-for="order in orders" :key="order.url" type="flex" justify="space-around" class="w-100 order">
-            <a-col class="d-flex-column">
+    <div v-for="order in orders" :key="order.url"  class="w-100 order d-flex j-c-a">
+            <div class="d-flex-column col">
               <div class="title">
-                <a-icon type="clock-circle"/>
                 {{ $t('Время') }}
               </div>
               {{ order.created_at.split('T')[0] }} <br> {{ order.created_at.split('T')[1].split('.')[0] }}
-            </a-col>
+            </div>
 
-            <a-col class="d-flex-column">
+            <div class="d-flex-column col">
               <div class="title">
-                <a-icon type="user"/>
                 {{ $t('Клиент') }}
               </div>
               {{ order.full_name }}
-            </a-col>
+            </div>
 
-            <a-col class="d-flex-column">
+            <div class="d-flex-column col">
               <div class="title">
                 {{ $t('Номер заказчика') }}
               </div>
               {{ order.phone_number }}
-            </a-col>
+            </div>
 
-            <a-col class="d-flex-column">
+            <div class="d-flex-column col">
               <div class="title">
                 {{ $t('Адрес') }}
               </div>
               {{ getlocationByUrl(order.address).location }}
-            </a-col>
+            </div>
 
-            <a-col class="d-flex-column">
+            <div class="d-flex-column col">
               <div class="title">
                 {{ $t('Категория') }}
               </div>
@@ -39,24 +37,22 @@
                 название: {{ getCategoryByUrl(order.category).name }} <br>
                 стоимость: {{ getCategoryByUrl(order.category).cost }} <br>
               </div>
-            </a-col>
+            </div>
 
 
 
             <template v-if="order.receiver">
-              <a-col class="d-flex-column">
+              <div class="d-flex-column col">
                 <div class="title">
-                  <a-icon type="user"/>
                   {{ $t('Пользователь') }}
                 </div>
 
                 {{ getUserByUrl(order.receiver).info_driver.last_name + ' ' + getUserByUrl(order.receiver).info_driver.first_name }}
 
-              </a-col>
+              </div>
 
-              <a-col class="d-flex-column">
+              <div class="d-flex-column col">
                 <div class="title">
-                  <a-icon type="phone"/>
                   {{ $t('Номер телефона') }}
                 </div>
                 {{ getUserByUrl(order.receiver).username }}
@@ -64,12 +60,11 @@
                 <div class="" v-if="getUserByUrl(order.receiver).info_driver.phone_number_second != 'null'">
                   {{ getUserByUrl(order.receiver).info_driver.phone_number_second }}
                 </div>
-              </a-col>
+              </div>
 
 
-              <a-col class="d-flex-column">
+              <div class="d-flex-column col">
                 <div class="title">
-                  <a-icon type="car"/>
                   {{ $t('Машина') }}
                 </div>
 
@@ -80,9 +75,9 @@
                   {{ getUserByUrl(order.receiver).info_driver.car_name.name }}
                   {{ getUserByUrl(order.receiver).info_driver.car_number }}
                 </div>
-              </a-col>
+              </div>
 
-              <a-col  v-if="$route.name === 'driver'" class="d-flex-column">
+              <div  v-if="$route.name === 'driver'" class="d-flex-column col">
                 <div class="title">
                   <a-icon type="phone"/>
                   {{ $t('Вернуть деньги') }}
@@ -90,10 +85,10 @@
                 <a-button @click="$emit('cashBack', getCategoryByUrl(order.category).percent)">
                   вернуть
                 </a-button>
-              </a-col>
+              </div>
             </template>
 
-    </a-row>
+    </div>
 
   </div>
 </template>

@@ -35,10 +35,11 @@ export default {
             return state.color;
         },
         getOrdersByStatus: state => (status) => {
-            return state.allOrders.filter(order => order.status === status);
+            let a =state.allOrders.filter(order => order.status === status).reverse()
+            return a;
         },
         getOrdersByDriver: state => (receiver) => {
-            return state.allOrders.filter(order => order && order.receiver === receiver) || false;
+            return state.allOrders.filter(order => order && order.receiver === receiver).reverse() || false;
         },
         getAllUsers: state => {
             return state.allUsers.reverse()

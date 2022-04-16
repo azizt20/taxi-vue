@@ -13,9 +13,7 @@
           <Map />
         </a-layout-content>
       </a-layout>
-      <a-layout-footer class="footer">
-        <Footer/>
-      </a-layout-footer>
+
     </a-layout>
 
   </div>
@@ -25,7 +23,6 @@
 import Map from "../components/Map";
 import Header from "../components/Header";
 import AddForm from "../components/AddForm";
-import Footer from "../components/Footer";
 
 export default {
   name: "AddLocations",
@@ -33,7 +30,6 @@ export default {
     Map,
     Header,
     AddForm,
-    Footer
   },
 
 
@@ -48,6 +44,10 @@ export default {
 
 .header, .slider, .footer, .content{
   background: transparent;
+}
+
+.header{
+  padding: 0;
 }
 .slider{
   flex: 0 0 400 !important;

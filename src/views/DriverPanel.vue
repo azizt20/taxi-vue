@@ -8,9 +8,6 @@
       <a-layout-content class="content">
         <DriverForm/>
       </a-layout-content>
-      <a-layout-footer class="footer">
-        <Footer/>
-      </a-layout-footer>
     </a-layout>
 
   </div>
@@ -18,7 +15,6 @@
 
 <script>
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import DriverForm from "../components/DriverForm";
 
 export default {
@@ -26,7 +22,6 @@ export default {
   components: {
     Header,
     DriverForm,
-    Footer
   },
 }
 </script>
@@ -38,8 +33,10 @@ export default {
   background: transparent;
 }
 
-.header, .slider, .footer, .content {
+.header, .slider, .content {
   background: transparent;
 }
-
+.header{
+  padding: 0;
+}
 </style>

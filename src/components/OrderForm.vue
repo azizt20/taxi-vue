@@ -25,7 +25,7 @@
 
       <a-form-item>
         <label> {{ $t('Выберите локацию') }}
-          <div class="certain-category-search-wrapper" style="width: 300px">
+          <div class="certain-category-search-wrapper" >
             <a-auto-complete
                 id="location"
                 class="certain-category-search"

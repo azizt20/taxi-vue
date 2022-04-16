@@ -1,9 +1,9 @@
 <template>
   <div class="Driver ">
-    <div class="w-100 d-flex j-c-a">
+    <div class="w-100 d-md-flex j-c-a">
       <a-form-item>
         <label> Поиск пользователя по <b>номеру телефона</b>
-          <div class="certain-category-search-wrapper" style="width: 300px">
+          <div class="certain-category-search-wrapper" >
             <a-auto-complete
                 id="driverNumber"
                 class="certain-category-search"
@@ -33,7 +33,7 @@
 
       <a-form-item>
         <label> Поиск пользователя по <b>номеру машины</b>
-          <div class="certain-category-search-wrapper" style="width: 300px">
+          <div class="certain-category-search-wrapper" >
             <a-auto-complete
                 id="carNumber"
                 class="certain-category-search"
@@ -62,7 +62,7 @@
     </div>
 
     <hr>
-    <div v-if="user" class="d-flex">
+    <div v-if="user" class="d-md-flex">
       <div class="user" style="text-align: start; ">
 
         <div class="info">Пользователь <b>#{{ user.info_driver.user_id }}</b></div>
@@ -125,12 +125,15 @@
       </div>
 
     </div>
-    <template v-if="user">
+    <div class="no-res">
+      <template v-if="user" >
 
-      <template v-if="OrdersByDriver(user.url)">
+        <template v-if="OrdersByDriver(user.url)">
           <OrderInfo :orders="OrdersByDriver(user.url)" @cashBack="cashBack"/>
+        </template>
       </template>
-    </template>
+    </div>
+
 
 
   </div>
@@ -275,7 +278,7 @@ export default {
   width: 100%;
   font-size: 20px;
   color: black;
-  padding: 100px;
+  padding: 10px;
   overflow-y: scroll;
 
   .user {
@@ -320,6 +323,20 @@ export default {
 
   }
 }
+
+
+@media (max-width: 768px) {
+  .user {
+    width: 100% !important;
+    padding: 20px 20px !important;
+
+      input, select {
+        width: auto !important;
+      }
+    }
+
+  }
+
 
 
 </style>
