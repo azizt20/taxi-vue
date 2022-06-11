@@ -1,6 +1,6 @@
 <template>
   <div class="container-xl">
-    <p> Privacy Policy</p>
+    <p> Privacy Policy 123123131</p>
     <p> Last updated: March 21, 2022</p>
     <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your
       information
